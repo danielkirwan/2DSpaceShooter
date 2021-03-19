@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    [SerializeField] private float _speed;
 
 
     // Start is called before the first frame update
@@ -19,6 +19,6 @@ public class Player : MonoBehaviour
     {
         //Vector3.right is exquivalent of writing (1,0,0)
         //This will move the object really fast
-        transform.Translate(Vector3.right * 5 * Time.deltaTime);
+        transform.Translate(Vector3.right * _speed * Time.deltaTime);
     }
 }
