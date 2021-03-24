@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _laserPrefab: {fileID: 561705534512373121, guid: aaaa73bb2a2d22c4cadb0af65d73e264,
+  _laserPrefab: {fileID: 1924328537580677445, guid: defaab18e5ca02548af94dc8eabed815,
     type: 3}
 --- !u!65 &1486490338
 BoxCollider:
