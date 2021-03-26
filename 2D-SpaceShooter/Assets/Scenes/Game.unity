@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _lives: 3
   _laserPrefab: {fileID: 1924328537580677445, guid: defaab18e5ca02548af94dc8eabed815,
     type: 3}
   _laserPlacementPosition: {fileID: 1099537835}

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [Header("Player speed")]
+    [Header("Player attributes")]
     [SerializeField] private float _speed;
+    [SerializeField] private int _lives = 3;
 
     [Header("GameObjects")]
     public GameObject _laserPrefab;
@@ -17,6 +18,9 @@ public class Player : MonoBehaviour
     [Header("FireRates")]
     [SerializeField] private float _fireRate = 0.5f;
     [SerializeField] private float _nextFire = -1f;
+
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +64,16 @@ public class Player : MonoBehaviour
 
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -9.25f, 2), transform.position.y, transform.position.z);
 
+    }
+
+    public void Damage()
+    {
+        _lives--;
+
+        if (_lives < 1)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 }
