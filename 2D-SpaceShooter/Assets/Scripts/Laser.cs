@@ -17,4 +17,9 @@ public class Laser : MonoBehaviour
     {
         transform.Translate(new Vector3(1,0,0)* _speed * Time.deltaTime,Space.World);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+       
+    }
 }
