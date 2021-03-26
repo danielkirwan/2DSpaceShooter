@@ -282,6 +282,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1022918319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1319747041705611571, guid: bf2a58e8710ff864cb9e08fe78031cc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 8502085363370405124}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1022918324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022918319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f08269e1c70344d99b4b15a07756ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 3.5
 --- !u!1 &1099537835
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +367,7 @@ MonoBehaviour:
   _laserPrefab: {fileID: 1924328537580677445, guid: defaab18e5ca02548af94dc8eabed815,
     type: 3}
   _laserPlacementPosition: {fileID: 1099537835}
-  _fireRate: 0.5
+  _fireRate: 0.16
   _nextFire: -1
 --- !u!65 &1486490338
 BoxCollider:
@@ -597,12 +616,12 @@ PrefabInstance:
     - target: {fileID: 2541752175505575268, guid: bf2a58e8710ff864cb9e08fe78031cc6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7.82
       objectReference: {fileID: 0}
     - target: {fileID: 2541752175505575268, guid: bf2a58e8710ff864cb9e08fe78031cc6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.95
       objectReference: {fileID: 0}
     - target: {fileID: 2541752175505575268, guid: bf2a58e8710ff864cb9e08fe78031cc6,
         type: 3}
