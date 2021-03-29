@@ -51,7 +51,8 @@ public class Player : MonoBehaviour
     void SpawnLaser()
     {
         _nextFire = Time.time + _fireRate;
-        Instantiate(_laserPrefab, _laserPlacementPosition.transform.position, Quaternion.Euler(0,0,-90));
+        //Instantiate(_laserPrefab, _laserPlacementPosition.transform.position, Quaternion.Euler(0,0,-90));
+        Instantiate(_laserPrefab, _laserPlacementPosition.transform.position, Quaternion.identity);
     }
 
     void PlayerMovement()
