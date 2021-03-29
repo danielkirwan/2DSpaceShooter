@@ -23,17 +23,35 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Laser")
+    //    {
+    //        Destroy(other.gameObject);
+    //        Destroy(this.gameObject);
+    //    }
+    //    else if (other.gameObject.tag == "Player")
+    //    {
+    //        Player player = other.transform.GetComponent<Player>();
+    //        if(player != null)
+    //        {
+    //            player.Damage();
+    //        }
+    //        Destroy(this.gameObject);
+    //    }
+    //}
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.gameObject.tag == "Laser")
+        if (collision.gameObject.tag == "Laser")
         {
-            Destroy(other.gameObject);
+            Destroy(collision.gameObject);
             Destroy(this.gameObject);
         }
-        else if (other.gameObject.tag == "Player")
+        else if (collision.gameObject.tag == "Player")
         {
-            Player player = other.transform.GetComponent<Player>();
-            if(player != null)
+            Player player = collision.transform.GetComponent<Player>();
+            if (player != null)
             {
                 player.Damage();
             }
