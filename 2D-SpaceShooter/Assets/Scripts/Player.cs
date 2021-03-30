@@ -99,4 +99,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Tshot")
+        {
+            Debug.Log("Hit player with TSHOT");
+            _isTripleShotActive = true;
+            Destroy(collision.gameObject);
+        }
+    }
 }
