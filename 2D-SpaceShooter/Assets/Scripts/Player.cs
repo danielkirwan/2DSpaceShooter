@@ -8,12 +8,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private int _lives = 3;
 
+    [Space]
+
     [Header("GameObjects")]
     public GameObject _laserPrefab;
     [SerializeField] private GameObject _laserPlacementPosition;
+    [SerializeField] private GameObject _tripleShotPrefab;
 
-    private float _horizontalMovement;
-    private float _verticalMovement;
+    [Space]
 
     [Header("FireRates")]
     [SerializeField] private float _fireRate = 0.5f;
@@ -22,7 +24,11 @@ public class Player : MonoBehaviour
     [Space]
 
     private SpawnManager _spawnManager;
+    private float _horizontalMovement;
+    private float _verticalMovement;
 
+    [Header("Tripleshot active")]
+    [SerializeField] private bool _isTripleShotActive;
 
 
     // Start is called before the first frame update
@@ -52,7 +58,14 @@ public class Player : MonoBehaviour
     {
         _nextFire = Time.time + _fireRate;
         //Instantiate(_laserPrefab, _laserPlacementPosition.transform.position, Quaternion.Euler(0,0,-90));
-        Instantiate(_laserPrefab, _laserPlacementPosition.transform.position, Quaternion.identity);
+
+        if (_isTripleShotActive)
+        {
+            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+        }
+        else{
+            Instantiate(_laserPrefab, _laserPlacementPosition.transform.position, Quaternion.identity);
+        }
     }
 
     void PlayerMovement()
