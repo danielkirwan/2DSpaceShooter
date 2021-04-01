@@ -7,6 +7,7 @@ TagManager:
   - Laser
   - Enemy
   - Tshot
+  - Sboost
   layers:
   - Default
   - TransparentFX

@@ -17,4 +17,20 @@ public class PowerUp : MonoBehaviour
         transform.Translate(new Vector3(-1, 0, 0) * _speed * Time.deltaTime, Space.World);
         transform.Rotate(0, 0, 50 * Time.deltaTime); //rotates 50 degrees per second around z axis
     }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Hit player");
+            Player player = collision.transform.GetComponent<Player>();
+            if(player != null)
+            {
+                player.TripleShotActive();
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
 }

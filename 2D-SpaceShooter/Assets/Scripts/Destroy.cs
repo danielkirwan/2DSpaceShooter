@@ -8,11 +8,10 @@ public class Destroy : MonoBehaviour
     {
         if(other.gameObject.tag == "Laser")
         {
-            Debug.Log("Laser hit shredder");
-            Destroy(other.gameObject);
-        }else if(other.gameObject.tag == "Tshot")
-        {
-            Debug.Log("Tshot hit wall");
+            if (other.transform.parent != null)
+            {
+                Destroy(other.transform.parent.gameObject);
+            }
             Destroy(other.gameObject);
         }
     }
