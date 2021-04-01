@@ -5,6 +5,7 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
     [SerializeField] private float _speed = 4f;
+    [SerializeField] private int _powerupID;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +24,24 @@ public class PowerUp : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            Debug.Log("Hit player");
             Player player = collision.transform.GetComponent<Player>();
             if(player != null)
             {
-                player.TripleShotActive();
+                switch (_powerupID)
+                {
+                    case 0:
+                        player.TripleShotActive();
+                        break;
+                    case 1:
+                        Debug.Log("Hit speedboost");
+                        break;
+                    case 2:
+                        Debug.Log("Shields collected");
+                        break;
+                    default:
+                        Debug.Log("Default case");
+                        break;
+                }
                 Destroy(this.gameObject);
             }
         }

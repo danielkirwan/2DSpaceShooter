@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StarScroll : MonoBehaviour
 {
-    private float _scrollSpeed = -5f;
+    private float _scrollSpeed = -3f;
     private Vector2 _startPos;
         
     // Start is called before the first frame update
