@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -158,7 +158,7 @@ MonoBehaviour:
   _laserPlacementPosition: {fileID: 1309474738}
   _tripleShotPrefab: {fileID: 2210897303612669642, guid: 26fd56869e628674f9d2c0285717c70c,
     type: 3}
-  _fireRate: 0.16
+  _fireRate: 0.25
   _nextFire: -1
   _isTripleShotActive: 0
 --- !u!4 &282516169
@@ -877,10 +877,10 @@ MonoBehaviour:
   _enemyPrefab: {fileID: 7814672909770499250, guid: bf2a58e8710ff864cb9e08fe78031cc6,
     type: 3}
   _spawnContainer: {fileID: 1792464525}
-  _tripleShotPrefab: {fileID: 8899688016466410355, guid: 575731c4c5f3d184dbd98295186650a6,
-    type: 3}
-  _speedBoostPrefab: {fileID: 903251601736524776, guid: 663b7aa67dd598d43a4315e69db8a577,
-    type: 3}
+  _powerups:
+  - {fileID: 8899688016466410355, guid: 575731c4c5f3d184dbd98295186650a6, type: 3}
+  - {fileID: 903251601736524776, guid: 663b7aa67dd598d43a4315e69db8a577, type: 3}
+  - {fileID: 903251601736524776, guid: 663b7aa67dd598d43a4315e69db8a577, type: 3}
 --- !u!4 &1855273704
 Transform:
   m_ObjectHideFlags: 0

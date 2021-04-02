@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [Header("Player attributes")]
     [SerializeField] private float _speed;
     [SerializeField] private int _lives = 3;
+    private float _speedMultiplier = 2f;
 
     [Space]
 
@@ -28,7 +29,8 @@ public class Player : MonoBehaviour
     private float _verticalMovement;
 
     [Header("Tripleshot active")]
-    [SerializeField] private bool _isTripleShotActive;
+    [SerializeField] private bool _isTripleShotActive = false;
+    private bool _isSpeedBoostActive = false;
 
 
     // Start is called before the first frame update
@@ -75,6 +77,7 @@ public class Player : MonoBehaviour
 
         transform.Translate(new Vector3(_horizontalMovement, _verticalMovement, 0) * _speed * Time.deltaTime);
 
+
         if (transform.position.y >= 8)
         {
             transform.position = new Vector3(transform.position.x, -5f, transform.position.z);
@@ -110,6 +113,20 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         _isTripleShotActive = false;
+    }
+
+    public void SpeedBoostActive()
+    {
+        _isSpeedBoostActive = true;
+        _speed *= _speedMultiplier;
+        StartCoroutine(SpeedBoostDeactivateRoutine());
+    }
+
+    IEnumerator SpeedBoostDeactivateRoutine()
+    {
+        yield return new WaitForSeconds(5);
+        _isSpeedBoostActive = false;
+        _speed /= _speedMultiplier;
     }
 
 }
