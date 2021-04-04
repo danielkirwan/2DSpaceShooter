@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public GameObject _laserPrefab;
     [SerializeField] private GameObject _laserPlacementPosition;
     [SerializeField] private GameObject _tripleShotPrefab;
+    [SerializeField] private GameObject _shieldPrefab;
 
     [Space]
 
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour
     [Header("Tripleshot active")]
     [SerializeField] private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
+    private bool _isShieldActive = false;
 
 
     // Start is called before the first frame update
@@ -93,6 +95,8 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
+        if (_isShieldActive) return;
+
         _lives--;
 
         if (_lives < 1)
@@ -100,6 +104,18 @@ public class Player : MonoBehaviour
             _spawnManager.StopSpawning();
             Destroy(this.gameObject);
         }
+    }
+
+    public void ActivateShield()
+    {
+        _isShieldActive = true;
+        _shieldPrefab.SetActive(true);
+    }
+
+    void DeactivateShield()
+    {
+        _isShieldActive = false;
+        _shieldPrefab.SetActive(false);
     }
 
     public void TripleShotActive()
