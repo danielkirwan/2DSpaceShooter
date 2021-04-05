@@ -95,7 +95,11 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-        if (_isShieldActive) return;
+        if (_isShieldActive)
+        {
+            DeactivateShield();
+            return;
+        }
 
         _lives--;
 
@@ -144,5 +148,7 @@ public class Player : MonoBehaviour
         _isSpeedBoostActive = false;
         _speed /= _speedMultiplier;
     }
+
+
 
 }
