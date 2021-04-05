@@ -34,6 +34,10 @@ public class Player : MonoBehaviour
     private bool _isSpeedBoostActive = false;
     private bool _isShieldActive = false;
 
+    [Space]
+    private int _score;
+    private UIManager _uIManager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +48,11 @@ public class Player : MonoBehaviour
         if(_spawnManager == null)
         {
             Debug.Log("Spawn manager is NULL");
+        }
+        _uIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        if(_uIManager == null)
+        {
+            Debug.Log("UI Manager is null");
         }
     }
 
@@ -149,6 +158,10 @@ public class Player : MonoBehaviour
         _speed /= _speedMultiplier;
     }
 
-
+    public void AddScore()
+    {
+        _score += 10;
+        _uIManager.UpdateScore(_score);
+    }
 
 }

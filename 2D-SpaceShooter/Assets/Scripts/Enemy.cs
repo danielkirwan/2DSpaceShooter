@@ -5,9 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed = 3.5f;
+    private Player _player;
     // Start is called before the first frame update
     void Start()
     {
+        _player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -28,6 +30,10 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Laser")
         {
             Destroy(collision.gameObject);
+            if(_player != null)
+            {
+                _player.AddScore();
+            }
             Destroy(this.gameObject);
         }
         else if (collision.gameObject.tag == "Player")
