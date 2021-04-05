@@ -590,7 +590,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2328937166430008071}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1465731133
+--- !u!95 &1465731135
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -1074,7 +1074,7 @@ PrefabInstance:
     - target: {fileID: 2328937166026703866, guid: 3275e8b5d803dc24c9e1161be05779d1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3275e8b5d803dc24c9e1161be05779d1, type: 3}
@@ -1089,6 +1089,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShieldPowerUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1592884491524539254, guid: 8d9ef1dbe3f9fe84aac5ed1fb0576e4b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5068752402617252891, guid: 8d9ef1dbe3f9fe84aac5ed1fb0576e4b,
         type: 3}
