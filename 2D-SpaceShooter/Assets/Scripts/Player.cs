@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Player : MonoBehaviour
 {
     [Header("Player attributes")]
@@ -112,9 +113,13 @@ public class Player : MonoBehaviour
 
         _lives--;
 
+        _uIManager.UpdateLives(_lives);
+
         if (_lives < 1)
         {
             _spawnManager.StopSpawning();
+            _uIManager.GameOverText();
+            
             Destroy(this.gameObject);
         }
     }
