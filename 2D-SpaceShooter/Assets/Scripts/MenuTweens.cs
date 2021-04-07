@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class MenuTweens : MonoBehaviour
 {
-    [SerializeField] private GameObject _titleTextObject;
+    [SerializeField] private GameObject _titleImage;
+    [SerializeField] private GameObject _nameTitle;
     // Start is called before the first frame update
     void Start()
     {
         MoveTitleText();
+        MoveTitleImage();
     }
 
     // Update is called once per frame
@@ -19,7 +21,13 @@ public class MenuTweens : MonoBehaviour
 
     public void MoveTitleText()
     {
-        LeanTween.moveX(_titleTextObject.GetComponent<RectTransform>(), 0f, 2f).setEase(LeanTweenType.easeOutBounce).setDelay(1f);
+        LeanTween.moveX(_nameTitle.GetComponent<RectTransform>(), 0f, 3f).setEase(LeanTweenType.easeOutBounce).setDelay(1f);
+    }
+
+    public void MoveTitleImage()
+    {
+        LeanTween.moveX(_titleImage.GetComponent<RectTransform>(), 0f, 3f).setEase(LeanTweenType.easeOutBounce).setDelay(1f);
+
     }
 
 }
