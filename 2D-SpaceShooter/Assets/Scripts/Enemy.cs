@@ -5,11 +5,33 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed = 3.5f;
+    private Animator _explosion_anim;
     private Player _player;
+    private Collider2D _collider;
+    private SpriteRenderer _enemySprite;
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        _explosion_anim = GetComponent<Animator>();
+        if (_explosion_anim == null)
+        {
+            Debug.Log("Enemy animator is null");
+        }
+        _enemySprite = GetComponentInChildren<SpriteRenderer>();
+        if(_enemySprite == null)
+        {
+            Debug.Log("Sprite Renderer is empty");
+        }
+    }
+
+    private void Awake()
+    {
+        _collider = GetComponent<Collider2D>();
+        if (_collider == null)
+        {
+            Debug.Log("Collider is null");
+        }
     }
 
     // Update is called once per frame
@@ -34,7 +56,10 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddScore();
             }
-            Destroy(this.gameObject);
+            _explosion_anim.SetTrigger("OnDeath");
+            Destroy(this._collider);
+            //_enemySprite.gameObject.SetActive(false);
+            Destroy(this.gameObject,1.5f);
         }
         else if (collision.gameObject.tag == "Player")
         {
@@ -45,5 +70,11 @@ public class Enemy : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
+    }
+
+
+    private void OnEnable()
+    {
+        _collider.enabled = !_collider.enabled;
     }
 }
