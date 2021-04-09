@@ -8,21 +8,21 @@ public class Enemy : MonoBehaviour
     private Animator _explosion_anim;
     private Player _player;
     private Collider2D _collider;
-    private SpriteRenderer _enemySprite;
+    [SerializeField] private SpriteRenderer _enemySprite;
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
-        _explosion_anim = GetComponent<Animator>();
-        if (_explosion_anim == null)
-        {
-            Debug.Log("Enemy animator is null");
-        }
-        _enemySprite = GetComponentInChildren<SpriteRenderer>();
-        if(_enemySprite == null)
-        {
-            Debug.Log("Sprite Renderer is empty");
-        }
+        _explosion_anim = GetComponentInChildren<Animator>();
+        //if (_explosion_anim == null)
+        //{
+        //    Debug.Log("Enemy animator is null");
+        //}
+        //_enemySprite = GetComponentInChildren<SpriteRenderer>();
+        //if(_enemySprite == null)
+        //{
+        //    Debug.Log("Sprite Renderer is empty");
+        //}
     }
 
     private void Awake()
@@ -58,6 +58,7 @@ public class Enemy : MonoBehaviour
             }
             _explosion_anim.SetTrigger("OnDeath");
             Destroy(this._collider);
+            _speed = 0.0f;
             //_enemySprite.gameObject.SetActive(false);
             Destroy(this.gameObject,1.5f);
         }
@@ -68,7 +69,10 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            Destroy(this.gameObject);
+            _explosion_anim.SetTrigger("OnDeath");
+            Destroy(this._collider);
+            _speed = 0.0f;
+            Destroy(this.gameObject, 1.5f);
         }
     }
 
