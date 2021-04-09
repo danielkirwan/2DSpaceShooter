@@ -26,9 +26,14 @@ public class Player : MonoBehaviour
 
     [Space]
 
+    [Header("Thrusters")]
+    [SerializeField] private GameObject _thruster;
+
     private SpawnManager _spawnManager;
     private float _horizontalMovement;
     private float _verticalMovement;
+
+    [Space]
 
     [Header("Tripleshot active")]
     [SerializeField] private bool _isTripleShotActive = false;
@@ -86,6 +91,26 @@ public class Player : MonoBehaviour
     {
         _horizontalMovement = Input.GetAxis("Horizontal");
         _verticalMovement = Input.GetAxis("Vertical");
+
+        if (_horizontalMovement == 0)
+        {
+            _thruster.SetActive(false);
+        }
+        if (_verticalMovement == 0)
+        {
+            _thruster.SetActive(false);
+        }
+        if (_horizontalMovement < 0 || _horizontalMovement > 0)
+        {
+            _thruster.SetActive(true);
+        }
+
+        if (_verticalMovement < 0 || _verticalMovement > 0)
+        {
+            _thruster.SetActive(true);
+        }
+
+
 
         transform.Translate(new Vector3(_horizontalMovement, _verticalMovement, 0) * _speed * Time.deltaTime);
 

@@ -14,5 +14,18 @@ public class Destroy : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
+
+        if(other.gameObject.tag == "Tshot")
+        {
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "Sboost")
+        {
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "Shield")
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
