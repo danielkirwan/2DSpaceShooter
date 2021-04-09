@@ -11,8 +11,7 @@ public class SpawnManager : MonoBehaviour
     private bool _stopSpawning = false;
     void Start()
     {
-        StartCoroutine(SpawnEnemy());
-        StartCoroutine(SpawnPowerUpRoutine());
+
     }
 
     // Update is called once per frame
@@ -21,11 +20,19 @@ public class SpawnManager : MonoBehaviour
         
     }
 
+    public void StartSpawning()
+    {
+        StartCoroutine(SpawnEnemy());
+        StartCoroutine(SpawnPowerUpRoutine());
+    }
+
 
     //spawn game objects every 5 seconds
 
     IEnumerator SpawnEnemy()
     {
+        yield return new WaitForSeconds(2f);
+
         while (!_stopSpawning)
         {
             float randY = Random.Range(-3.75f, 6f);
