@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _laserPlacementPosition;
     [SerializeField] private GameObject _tripleShotPrefab;
     [SerializeField] private GameObject _shieldPrefab;
+    [SerializeField] private GameObject _rightEngine;
+    [SerializeField] private GameObject _leftEngine;
 
     [Space]
 
@@ -137,6 +139,14 @@ public class Player : MonoBehaviour
         }
 
         _lives--;
+
+        if(_lives == 2)
+        {
+            _rightEngine.SetActive(true);
+        }else if(_lives == 1)
+        {
+            _leftEngine.SetActive(true);
+        }
 
         _uIManager.UpdateLives(_lives);
 
