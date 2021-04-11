@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         //set the players position when initiated 
-        transform.position = new Vector3(-9, 0, 0);
+        transform.position = new Vector3(-4.5f, 0, 0);
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         if(_spawnManager == null)
         {
