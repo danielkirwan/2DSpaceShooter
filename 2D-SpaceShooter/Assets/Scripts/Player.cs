@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
     private int _score;
     private UIManager _uIManager;
 
+    public static AudioSource[] sfx;
+
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +64,8 @@ public class Player : MonoBehaviour
         {
             Debug.Log("UI Manager is null");
         }
+
+        sfx = GameObject.FindWithTag("GameData").GetComponentsInChildren<AudioSource>();
     }
 
     // Update is called once per frame
@@ -72,6 +76,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)
         {
             SpawnLaser();
+            sfx[1].Play();
         }
     }
 
@@ -154,7 +159,7 @@ public class Player : MonoBehaviour
         {
             _spawnManager.StopSpawning();
             _uIManager.GameOverText();
-            
+            sfx[2].Play();
             Destroy(this.gameObject);
         }
     }

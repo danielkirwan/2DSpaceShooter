@@ -31,12 +31,15 @@ public class PowerUp : MonoBehaviour
                 {
                     case 0:
                         player.TripleShotActive();
+                        Player.sfx[5].Play();
                         break;
                     case 1:
                         player.SpeedBoostActive();
+                        Player.sfx[4].Play();
                         break;
                     case 2:
                         player.ActivateShield();
+                        Player.sfx[3].Play();
                         break;
                     default:
                         Debug.Log("Default case");

@@ -51,12 +51,7 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddScore();
             }
-            //_explosion_anim.SetTrigger("OnDeath");
-            GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-            Destroy(this._collider);
-            _speed = 0.0f;
-            Destroy(explosion, 1f);
-            Destroy(this.gameObject,0.5f);
+            OnHit();
         }
         else if (collision.gameObject.tag == "Player")
         {
@@ -65,13 +60,18 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            // _explosion_anim.SetTrigger("OnDeath");
-            GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-            Destroy(this._collider);
-            _speed = 0.0f;
-            Destroy(explosion, 1f);
-            Destroy(this.gameObject, 0.5f);
+            OnHit();
         }
+    }
+
+    public void OnHit()
+    {
+        GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        Destroy(this._collider);
+        _speed = 0.0f;
+        Player.sfx[2].Play();
+        Destroy(explosion, 1f);
+        Destroy(this.gameObject, 0.5f);
     }
 
 

@@ -9,6 +9,7 @@ TagManager:
   - Tshot
   - Sboost
   - Shield
+  - GameData
   layers:
   - Default
   - TransparentFX

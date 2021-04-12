@@ -17,6 +17,7 @@ public class Asteroid : MonoBehaviour
         {
             Debug.Log("Vignette is empty");
         }
+        
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class Asteroid : MonoBehaviour
             Destroy(collision.gameObject);
             _spawnManager.StartSpawning();
             _vignette.PlayVignetteAnimation();
+            Player.sfx[2].Play();
             Destroy(this.gameObject, 0.3f);
             Destroy(explosion, 3f);
         }
