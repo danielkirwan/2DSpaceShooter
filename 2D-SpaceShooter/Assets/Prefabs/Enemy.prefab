@@ -94,7 +94,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 6
-  _enemySprite: {fileID: 151723429360274937}
 --- !u!1 &8787252000974445494
 GameObject:
   m_ObjectHideFlags: 0
