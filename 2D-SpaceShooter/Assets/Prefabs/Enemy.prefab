@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 6
+  _explosionPrefab: {fileID: 139366, guid: f51c94f5174c3054abd8d86a1156150f, type: 3}
 --- !u!1 &8787252000974445494
 GameObject:
   m_ObjectHideFlags: 0

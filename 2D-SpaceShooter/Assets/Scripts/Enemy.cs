@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private Animator _explosion_anim;
     private Player _player;
     private Collider2D _collider;
+    [SerializeField] private GameObject _explosionPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,10 +51,12 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddScore();
             }
-            _explosion_anim.SetTrigger("OnDeath");
+            //_explosion_anim.SetTrigger("OnDeath");
+            GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
             Destroy(this._collider);
             _speed = 0.0f;
-            Destroy(this.gameObject,1.5f);
+            Destroy(explosion, 1f);
+            Destroy(this.gameObject,0.5f);
         }
         else if (collision.gameObject.tag == "Player")
         {
@@ -62,10 +65,12 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            _explosion_anim.SetTrigger("OnDeath");
+            // _explosion_anim.SetTrigger("OnDeath");
+            GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
             Destroy(this._collider);
             _speed = 0.0f;
-            Destroy(this.gameObject, 1.5f);
+            Destroy(explosion, 1f);
+            Destroy(this.gameObject, 0.5f);
         }
     }
 
