@@ -125,6 +125,12 @@ public class Player : MonoBehaviour
             }        
     }
 
+    public void GiveAmmo()
+    {
+        _currentAmmo = _maxAmmo;
+        _uIManager.UpdateBullets(_currentAmmo);
+    }
+
     void PlayerMovement()
     {
         _horizontalMovement = Input.GetAxis("Horizontal");

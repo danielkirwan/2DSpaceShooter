@@ -41,6 +41,10 @@ public class PowerUp : MonoBehaviour
                         player.ActivateShield();
                         Player.sfx[3].Play();
                         break;
+                    case 3:
+                        player.GiveAmmo();
+                        Player.sfx[6].Play();
+                        break;
                     default:
                         Debug.Log("Default case");
                         break;

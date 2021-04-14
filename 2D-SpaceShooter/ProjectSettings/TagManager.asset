@@ -11,6 +11,8 @@ TagManager:
   - Shield
   - GameData
   - EnemyLaser
+  - Bullet
+  - Ammo
   layers:
   - Default
   - TransparentFX
