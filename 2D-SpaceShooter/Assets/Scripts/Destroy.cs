@@ -27,5 +27,13 @@ public class Destroy : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
+        if(other.gameObject.tag == "EnemyLaser")
+        {
+            Destroy(other.gameObject);
+        }
+        if(other.gameObject.tag == "Ammo")
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

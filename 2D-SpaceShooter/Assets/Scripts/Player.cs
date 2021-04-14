@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public GameObject _laserPrefab;
     [SerializeField] private GameObject _laserPlacementPosition;
     [SerializeField] private GameObject _tripleShotPrefab;
+    [SerializeField] private GameObject _laserBombPrefab;
     [SerializeField] private GameObject _shieldPrefab;
     [SerializeField] private GameObject _rightEngine;
     [SerializeField] private GameObject _leftEngine;
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
     private bool _isShieldActive = false;
+    [SerializeField] private bool _isLaserBombActive = false;
 
     [Space]
     private int _score;
@@ -113,6 +115,10 @@ public class Player : MonoBehaviour
             if (_isTripleShotActive)
             {
                 Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+            }else if (_isLaserBombActive)
+            {
+            Instantiate(_laserBombPrefab, _laserPlacementPosition.transform.position, Quaternion.identity);
+            LaserBombDeactivate();
             }
             else
             {
@@ -220,6 +226,17 @@ public class Player : MonoBehaviour
         if (_lives == 3) return;
         _lives++;
         _uIManager.UpdateLives(_lives);
+        if (_lives == 3)
+        {
+            _rightEngine.SetActive(false);
+            return;
+        }
+        else if (_lives == 2)
+        {
+            _leftEngine.SetActive(false);
+            return;
+        }
+        
     }
 
     public void ActivateShield()
@@ -243,6 +260,16 @@ public class Player : MonoBehaviour
     {
         _isTripleShotActive = true;
         StartCoroutine(PowerdownTripleShotRoutine());
+    }
+
+    public void LaserBombActive()
+    {
+        _isLaserBombActive = true;
+    }
+
+    void LaserBombDeactivate()
+    {
+        _isLaserBombActive = false;
     }
 
 
