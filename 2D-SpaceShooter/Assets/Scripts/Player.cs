@@ -215,6 +215,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void HealPlayer()
+    {
+        if (_lives == 3) return;
+        _lives++;
+        _uIManager.UpdateLives(_lives);
+    }
+
     public void ActivateShield()
     {
         _isShieldActive = true;

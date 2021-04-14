@@ -45,6 +45,10 @@ public class PowerUp : MonoBehaviour
                         player.GiveAmmo();
                         Player.sfx[6].Play();
                         break;
+                    case 4:
+                        player.HealPlayer();
+                        Player.sfx[6].Play();
+                        break;
                     default:
                         Debug.Log("Default case");
                         break;
