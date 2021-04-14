@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private int _lives = 3;
     private float _speedMultiplier = 2f;
+    private float _thrusterMultiplier = 1.5f;
 
     [Space]
 
@@ -78,6 +79,26 @@ public class Player : MonoBehaviour
             SpawnLaser();
             sfx[1].Play();
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            SpeedThrustersIncrease();
+        }else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            SpeedThrustersDecrease();
+        }
+    }
+
+    void SpeedThrustersIncrease()
+    {
+        _speed *= _thrusterMultiplier;
+        Debug.Log("Speed is: " + _speed);
+    }
+
+    void SpeedThrustersDecrease()
+    {
+        _speed /= _thrusterMultiplier;
+        Debug.Log("Speed is: " + _speed);
     }
 
     void SpawnLaser()
