@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     private Player _player;
     private Collider2D _collider;
     [SerializeField] private GameObject _explosionPrefab;
+    [SerializeField] private GameObject _enemylaserPrefab;
+    [SerializeField] private GameObject _laserSpawnPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Enemy animator is null");
         }
+        StartCoroutine(FireLaser());
     }
 
     private void Awake()
@@ -38,8 +41,17 @@ public class Enemy : MonoBehaviour
         { 
             float randPosY = Random.Range(-3.75f, 6f);
             transform.position = new Vector3(12f, randPosY, 0);
+            StartCoroutine(FireLaser());
         }
 
+    }
+
+    IEnumerator FireLaser()
+    {
+        float randNum = Random.Range(1f, 3f);
+        yield return new WaitForSeconds(randNum);
+        Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
+        Debug.Log("Firing laser");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -10,6 +10,7 @@ TagManager:
   - Sboost
   - Shield
   - GameData
+  - EnemyLaser
   layers:
   - Default
   - TransparentFX
