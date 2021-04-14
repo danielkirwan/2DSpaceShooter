@@ -25,8 +25,8 @@ public class MenuTweens : MonoBehaviour
 
     public void MoveButtonPanel()
     {
-        LeanTween.moveX(_playButton.GetComponent<RectTransform>(), 1522f, 1f).setEase(LeanTweenType.easeOutBack).setDelay(1f);
-        LeanTween.moveX(_quitButton.GetComponent<RectTransform>(), 1522f, 1f).setEase(LeanTweenType.easeOutBack).setDelay(2f);
+        LeanTween.moveX(_playButton.GetComponent<RectTransform>(), 744f, 1f).setEase(LeanTweenType.easeOutBack).setDelay(1f);
+        LeanTween.moveX(_quitButton.GetComponent<RectTransform>(), 744f, 1f).setEase(LeanTweenType.easeOutBack).setDelay(2f);
     }
 
     public void MoveTitleText()
