@@ -13,6 +13,7 @@ TagManager:
   - EnemyLaser
   - Bullet
   - Ammo
+  - CameraShake
   layers:
   - Default
   - TransparentFX

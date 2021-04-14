@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
     private UIManager _uIManager;
 
     public static AudioSource[] sfx;
+    private CameraShake _cameraShake;
 
 
     // Start is called before the first frame update
@@ -73,6 +74,7 @@ public class Player : MonoBehaviour
         _uIManager.UpdateBullets(_maxAmmo);
         _currentAmmo = 15;
         sfx = GameObject.FindWithTag("GameData").GetComponentsInChildren<AudioSource>();
+        _cameraShake = GameObject.Find("CameraShake").GetComponent<CameraShake>();
     }
 
     // Update is called once per frame
@@ -201,6 +203,7 @@ public class Player : MonoBehaviour
         }
 
         _lives--;
+        _cameraShake.CameraShakeStart();
 
         if(_lives == 2)
         {
