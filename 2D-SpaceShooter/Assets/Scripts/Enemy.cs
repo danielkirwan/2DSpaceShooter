@@ -11,6 +11,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject _explosionPrefab;
     [SerializeField] private GameObject _enemylaserPrefab;
     [SerializeField] private GameObject _laserSpawnPoint;
+
+    private float _fireRate = 3.0f;
+    private float _canFire = -1;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +25,7 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Enemy animator is null");
         }
-        StartCoroutine(FireLaser());
+        //StartCoroutine(FireLaser());
     }
 
     private void Awake()
@@ -35,24 +40,36 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Move();
+        if(Time.time > _canFire)
+        {
+            _fireRate = Random.Range(3f, 5f);
+            _canFire = Time.time + _fireRate;
+            Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
+        }
+    }
+
+
+    void Move()
+    {
         transform.Translate(new Vector3(-1, 0, 0) * _speed * Time.deltaTime);
-        
-        if (transform.position.x <= -12f) 
-        { 
+
+        if (transform.position.x <= -12f)
+        {
             float randPosY = Random.Range(-3.75f, 6f);
             transform.position = new Vector3(12f, randPosY, 0);
-            StartCoroutine(FireLaser());
+            //StartCoroutine(FireLaser());
         }
-
     }
 
-    IEnumerator FireLaser()
-    {
-        float randNum = Random.Range(1f, 3f);
-        yield return new WaitForSeconds(randNum);
-        Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
-        Debug.Log("Firing laser");
-    }
+
+    //IEnumerator FireLaser()
+    //{
+    //    float randNum = Random.Range(1f, 3f);
+    //    yield return new WaitForSeconds(randNum);
+    //    Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
+    //    Debug.Log("Firing laser");
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
