@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] private int _shieldHits = 3;
     private float _speedMultiplier = 2f;
     private float _thrusterMultiplier = 1.5f;
+    private int _maxAmmo = 15;
+    private int _currentAmmo;
 
     [Space]
 
@@ -66,7 +68,8 @@ public class Player : MonoBehaviour
         {
             Debug.Log("UI Manager is null");
         }
-
+        _uIManager.UpdateBullets(_maxAmmo);
+        _currentAmmo = 15;
         sfx = GameObject.FindWithTag("GameData").GetComponentsInChildren<AudioSource>();
     }
 
@@ -107,13 +110,19 @@ public class Player : MonoBehaviour
         _nextFire = Time.time + _fireRate;
         //Instantiate(_laserPrefab, _laserPlacementPosition.transform.position, Quaternion.Euler(0,0,-90));
 
-        if (_isTripleShotActive)
-        {
-            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
-        }
-        else{
-            Instantiate(_laserPrefab, _laserPlacementPosition.transform.position, Quaternion.identity);
-        }
+            if (_isTripleShotActive)
+            {
+                Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                if(_currentAmmo > 0)
+                {
+                    Instantiate(_laserPrefab, _laserPlacementPosition.transform.position, Quaternion.identity);
+                    _currentAmmo--;
+                    _uIManager.UpdateBullets(_currentAmmo);
+                }
+            }        
     }
 
     void PlayerMovement()

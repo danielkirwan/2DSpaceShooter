@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _livesImage;
     [SerializeField] private Sprite[] _shield;
     [SerializeField] private Image _shieldImage;
+    [SerializeField] private Sprite[] _bullets;
+    [SerializeField] private Image _bulletImage;
     [Space]
     [SerializeField] private GameObject _shieldImageObject;
 
@@ -37,6 +39,11 @@ public class UIManager : MonoBehaviour
                 SceneManager.LoadScene("Game", LoadSceneMode.Single);
             }
         }
+    }
+
+    public void UpdateBullets(int bullets)
+    {
+        _bulletImage.sprite = _bullets[bullets];
     }
 
     public void UpdateScore(int updateScore)
