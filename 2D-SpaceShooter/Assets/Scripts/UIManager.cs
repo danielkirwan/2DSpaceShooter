@@ -14,6 +14,11 @@ public class UIManager : MonoBehaviour
     [Header("Images")]
     [SerializeField] private Sprite[] _lives;
     [SerializeField] private Image _livesImage;
+    [SerializeField] private Sprite[] _shield;
+    [SerializeField] private Image _shieldImage;
+    [Space]
+    [SerializeField] private GameObject _shieldImageObject;
+
     private bool _isGameOver = false;
     // Start is called before the first frame update
     void Start()
@@ -42,6 +47,21 @@ public class UIManager : MonoBehaviour
     public void UpdateLives(int currentLives)
     {
         _livesImage.sprite = _lives[currentLives];
+    }
+
+    public void UpdateShield(int currentShieldHits)
+    {
+        _shieldImage.sprite = _shield[currentShieldHits];
+    }
+
+    public void ActivateShieldImage()
+    {
+        _shieldImageObject.SetActive(true);
+    }
+
+    public void DeactivateShieldImage()
+    {
+        _shieldImageObject.SetActive(false);
     }
 
     public void GameOverText()

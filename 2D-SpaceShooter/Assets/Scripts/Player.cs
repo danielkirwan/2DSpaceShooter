@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [Header("Player attributes")]
     [SerializeField] private float _speed;
     [SerializeField] private int _lives = 3;
+    [SerializeField] private int _shieldHits = 3;
     private float _speedMultiplier = 2f;
     private float _thrusterMultiplier = 1.5f;
 
@@ -158,10 +159,24 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
+        //if (_isShieldActive)
+        //{
+        //    DeactivateShield();
+        //    return;
+        //}
+
         if (_isShieldActive)
         {
-            DeactivateShield();
-            return;
+            if(_shieldHits > 1)
+            {
+                _shieldHits--;
+                _uIManager.UpdateShield(_shieldHits);
+                return;
+            }
+            else{
+                DeactivateShield();
+                return;
+            }
         }
 
         _lives--;
@@ -188,12 +203,17 @@ public class Player : MonoBehaviour
     public void ActivateShield()
     {
         _isShieldActive = true;
+        _shieldHits = 3;
+        _uIManager.ActivateShieldImage();
+        _uIManager.UpdateShield(_shieldHits);
         _shieldPrefab.SetActive(true);
+        Debug.Log("Shield hits is: " + _shieldHits);
     }
 
     void DeactivateShield()
     {
         _isShieldActive = false;
+        _uIManager.DeactivateShieldImage();
         _shieldPrefab.SetActive(false);
     }
 
