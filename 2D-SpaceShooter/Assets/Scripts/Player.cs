@@ -85,7 +85,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)
         {
             SpawnLaser();
-            sfx[1].Play();
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -117,10 +116,13 @@ public class Player : MonoBehaviour
             if (_isTripleShotActive)
             {
                 Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
-            }else if (_isLaserBombActive)
+                sfx[1].Play();
+            }
+            else if (_isLaserBombActive)
             {
             Instantiate(_laserBombPrefab, _laserPlacementPosition.transform.position, Quaternion.identity);
             LaserBombDeactivate();
+            sfx[1].Play();
             }
             else
             {
@@ -129,6 +131,11 @@ public class Player : MonoBehaviour
                     Instantiate(_laserPrefab, _laserPlacementPosition.transform.position, Quaternion.identity);
                     _currentAmmo--;
                     _uIManager.UpdateBullets(_currentAmmo);
+                    sfx[1].Play();
+                }   
+                else if(_currentAmmo == 0)
+                {
+                sfx[7].Play();
                 }
             }        
     }
@@ -137,6 +144,12 @@ public class Player : MonoBehaviour
     {
         _currentAmmo = _maxAmmo;
         _uIManager.UpdateBullets(_currentAmmo);
+    }
+
+    public void AmmoDeplete()
+    {
+        _uIManager.UpdateBullets(16);
+        _currentAmmo = 0;
     }
 
     void PlayerMovement()

@@ -53,6 +53,10 @@ public class PowerUp : MonoBehaviour
                         player.LaserBombActive();
                         Player.sfx[6].Play();
                         break;
+                    case 6:
+                        player.AmmoDeplete();
+                        Player.sfx[6].Play();
+                        break;
                     default:
                         Debug.Log("Default case");
                         break;
