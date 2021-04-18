@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed = 3.5f;
@@ -11,10 +12,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject _explosionPrefab;
     [SerializeField] private GameObject _enemylaserPrefab;
     [SerializeField] private GameObject _laserSpawnPoint;
+    [SerializeField] private GameObject _shieldPrefab;
 
     private float _fireRate = 3.0f;
     private float _canFire = -1;
-
+    [SerializeField] private bool _hasShield = false;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +27,10 @@ public class Enemy : MonoBehaviour
         if (_explosion_anim == null)
         {
             Debug.Log("Enemy animator is null");
+        }
+        if(_hasShield == true)
+        {
+            HasShield();
         }
         //StartCoroutine(FireLaser());
     }
@@ -58,23 +65,18 @@ public class Enemy : MonoBehaviour
         {
             float randPosY = Random.Range(-3.75f, 6f);
             transform.position = new Vector3(12f, randPosY, 0);
-            //StartCoroutine(FireLaser());
         }
     }
-
-
-    //IEnumerator FireLaser()
-    //{
-    //    float randNum = Random.Range(1f, 3f);
-    //    yield return new WaitForSeconds(randNum);
-    //    Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
-    //    Debug.Log("Firing laser");
-    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Laser")
         {
+            if (_hasShield)
+            {
+                DeactivateShield();
+                return;
+            }
             Destroy(collision.gameObject);
             if(_player != null)
             {
@@ -84,6 +86,11 @@ public class Enemy : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Player")
         {
+            if (_hasShield)
+            {
+                DeactivateShield();
+                return;
+            }
             Player player = collision.transform.GetComponent<Player>();
             if (player != null)
             {
@@ -108,4 +115,17 @@ public class Enemy : MonoBehaviour
     {
         _collider.enabled = !_collider.enabled;
     }
+
+    public void HasShield()
+    {
+        _hasShield = true;
+        _shieldPrefab.SetActive(true);
+    }
+
+    void DeactivateShield()
+    {
+        _shieldPrefab.SetActive(false);
+        _hasShield = false;   
+    }
+
 }
