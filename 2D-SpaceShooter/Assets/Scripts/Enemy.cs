@@ -62,26 +62,26 @@ public class Enemy : MonoBehaviour
     {
         if (_canDodge)
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.left) * 10f, Color.red);
-            
-             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.left), 10f, 1 << LayerMask.NameToLayer("Laser") );
-            //RaycastHit2D[] hit = Physics2D.CircleCastAll(transform.position, 10f, transform.TransformDirection(Vector2.left));
             RaycastHit2D hitCircle = Physics2D.CircleCast(transform.position, 2, transform.TransformDirection(Vector2.left), 1 << LayerMask.NameToLayer("Laser"));
             
-            if (hit.collider != null)
+            if(hitCircle.collider != null)
             {
-                if (hit.collider.gameObject.CompareTag("Laser"))
-                {
-                    Debug.Log("Hit line 75 " + hit.collider.gameObject.name);
-                    LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + 2f, this.transform.position.z), 0.5f);
-                }
-            }
+                
 
-            if(hitCircle != null)
-            {
                 if (hitCircle.collider.gameObject.CompareTag("Laser"))
                 {
-                    LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + 2f, this.transform.position.z), 0.5f);
+                    Vector3 hitCirclePoint = hitCircle.point;
+                    //Debug.Log("Hit point is " + hitCirclePoint);
+                    //Debug.Log("Enemy pos is " + this.transform.position);
+                    if (this.transform.position.y >= hitCirclePoint.y)
+                    {
+                        LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + 2f, this.transform.position.z), 0.5f);
+                    }else if(this.transform.position.y <= hitCirclePoint.y)
+                    {
+                        LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + -2f, this.transform.position.z), 0.5f);
+                    }
+
+
                 }
             }
 
