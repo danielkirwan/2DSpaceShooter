@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     private float _fireRate = 3.0f;
     private float _canFire = -1;
     [SerializeField] private bool _hasShield = false;
+    [SerializeField] private bool _canDodge = false;
     
 
     // Start is called before the first frame update
@@ -59,6 +60,23 @@ public class Enemy : MonoBehaviour
 
     void Move()
     {
+        if (_canDodge)
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.left) * 10f, Color.red);
+             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.left), 10f, 1 << LayerMask.NameToLayer("Laser") );
+            //RaycastHit2D[] hit = Physics2D.CircleCastAll(transform.position, 10f, transform.TransformDirection(Vector2.left));
+            
+            
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject.CompareTag("Laser"))
+                {
+                    Debug.Log("Hit line 75 " + hit.collider.gameObject.name);
+                    LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + 2f, this.transform.position.z), 0.5f);
+                }
+            }
+        }
+
         transform.Translate(new Vector3(-1, 0, 0) * _speed * Time.deltaTime);
 
         if (transform.position.x <= -12f)
@@ -75,6 +93,7 @@ public class Enemy : MonoBehaviour
             if (_hasShield)
             {
                 DeactivateShield();
+                Destroy(collision.gameObject);
                 return;
             }
             Destroy(collision.gameObject);
