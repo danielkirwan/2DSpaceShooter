@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
     private bool _stopSpawning = false;
     void Start()
     {
-        StartCoroutine(GetBossComponent());
+        
     }
 
     // Update is called once per frame
@@ -23,14 +23,16 @@ public class SpawnManager : MonoBehaviour
 
     public void StartSpawning()
     {
+        StartCoroutine(GetBossComponent());
         StartCoroutine(SpawnEnemy());
         StartCoroutine(SpawnPowerUpRoutine());
     }
 
     IEnumerator GetBossComponent()
     {
-        yield return new WaitForSeconds(2.1f);
-        _enemy = GameObject.Find("EnemyContainer").GetComponentInChildren<Enemy>();
+        yield return new WaitForSeconds(5f);
+        //_enemy = GameObject.Find("EnemyContainer").GetComponentInChildren<Enemy>();
+        _enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
         if (_enemy == null)
         {
             Debug.Log("Enemy is null");
@@ -48,11 +50,12 @@ public class SpawnManager : MonoBehaviour
             float randY = Random.Range(-3.75f, 6f);
             GameObject enemySpawned = Instantiate(_enemyPrefab, new Vector3(12f, randY, 0), Quaternion.identity);
             enemySpawned.transform.SetParent(_spawnContainer.transform);
-            yield return new WaitForSeconds(5);
             if (_enemy._isBoss)
             {
                 StopSpawning();
             }
+            yield return new WaitForSeconds(5);
+            
         }
     }
 
