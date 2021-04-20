@@ -105,8 +105,7 @@ public class Enemy : MonoBehaviour
                     {
                         LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + -2f, this.transform.position.z), 0.5f);
                     }
-
-
+                    _canDodge = false;
                 }
             }
 
