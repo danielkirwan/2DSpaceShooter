@@ -16,6 +16,10 @@ public class Enemy : MonoBehaviour
 
     private float _fireRate = 3.0f;
     private float _canFire = -1;
+
+    private float _fireRatePowerUp = 2f;
+    private float _canFireAtPowerup = -1f;
+
     [SerializeField] private bool _hasShield = false;
     [SerializeField] private bool _canDodge = false;
     
@@ -62,7 +66,28 @@ public class Enemy : MonoBehaviour
     {
         if (_canDodge)
         {
+
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.left) * 10f, Color.red);
+
             RaycastHit2D hitCircle = Physics2D.CircleCast(transform.position, 2, transform.TransformDirection(Vector2.left), 1 << LayerMask.NameToLayer("Laser"));
+            RaycastHit2D hitRay = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.left), 10f, 1 << LayerMask.NameToLayer("PowerUp"));
+
+            if(hitRay.collider != null)
+            {
+
+
+                Debug.Log("Hit something");
+                if (hitRay.collider.gameObject.CompareTag("Ammo") || hitRay.collider.gameObject.CompareTag("Shield") || hitRay.collider.gameObject.CompareTag("Sboost"))
+                {
+                    Debug.Log("Detected " + hitRay.collider.name);
+                    if(Time.time > _canFireAtPowerup)
+                    {
+                        _canFireAtPowerup = Time.time + _fireRatePowerUp;
+                        Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
+                    }
+                    
+                }
+            }
             
             if(hitCircle.collider != null)
             {

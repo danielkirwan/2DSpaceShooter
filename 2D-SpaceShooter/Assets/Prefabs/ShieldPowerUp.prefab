@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8412588084078420903}
   - component: {fileID: 1999939029}
   - component: {fileID: 1999939028}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShieldPowerUp
   m_TagString: Shield
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5987299305205456611}
   - component: {fileID: 3554644607936784829}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: powerupBlue_shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}

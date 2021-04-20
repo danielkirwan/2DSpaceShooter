@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 903251601293428343}
   - component: {fileID: 903251601293428336}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: speedYellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 903251601736524777}
   - component: {fileID: 1660280157397708669}
   - component: {fileID: 8577938451470030997}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpeedBoostPickup
   m_TagString: Sboost
   m_Icon: {fileID: 0}
