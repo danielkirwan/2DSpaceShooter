@@ -7,11 +7,12 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private GameObject _spawnContainer;
     [SerializeField] private GameObject[] _powerups;
+    private Enemy _enemy;
     // Start is called before the first frame update
     private bool _stopSpawning = false;
     void Start()
     {
-
+        StartCoroutine(GetBossComponent());
     }
 
     // Update is called once per frame
@@ -26,6 +27,15 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnPowerUpRoutine());
     }
 
+    IEnumerator GetBossComponent()
+    {
+        yield return new WaitForSeconds(2.1f);
+        _enemy = GameObject.Find("EnemyContainer").GetComponentInChildren<Enemy>();
+        if (_enemy == null)
+        {
+            Debug.Log("Enemy is null");
+        }
+    }
 
     //spawn game objects every 5 seconds
 
@@ -39,6 +49,10 @@ public class SpawnManager : MonoBehaviour
             GameObject enemySpawned = Instantiate(_enemyPrefab, new Vector3(12f, randY, 0), Quaternion.identity);
             enemySpawned.transform.SetParent(_spawnContainer.transform);
             yield return new WaitForSeconds(5);
+            if (_enemy._isBoss)
+            {
+                StopSpawning();
+            }
         }
     }
 

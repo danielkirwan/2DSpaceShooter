@@ -334,3 +334,6 @@ MonoBehaviour:
   _laserSpawnPoint: {fileID: 3124647942284198753}
   _shieldPrefab: {fileID: 1491037044051995028}
   _hasShield: 1
+  _canDodge: 0
+  _isBoss: 0
+  _health: 1

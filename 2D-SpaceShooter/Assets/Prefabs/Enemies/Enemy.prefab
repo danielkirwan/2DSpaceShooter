@@ -129,6 +129,11 @@ MonoBehaviour:
   _enemylaserPrefab: {fileID: 3229964169312461935, guid: fdd4c72b93ef12440a1d2edbd2d6f495,
     type: 3}
   _laserSpawnPoint: {fileID: 3585734123030182866}
+  _shieldPrefab: {fileID: 0}
+  _hasShield: 0
+  _canDodge: 0
+  _isBoss: 0
+  _health: 1
 --- !u!1 &8787252000974445494
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,8 +20,15 @@ public class Enemy : MonoBehaviour
     private float _fireRatePowerUp = 2f;
     private float _canFireAtPowerup = -1f;
 
+    private float _bossFireRateMultiShot = 5f;
+    private float _canFireBoss = -1f;
+
+    [Header("Bools")]
     [SerializeField] private bool _hasShield = false;
     [SerializeField] private bool _canDodge = false;
+    [SerializeField] public bool _isBoss = false;
+    [Space]
+    [SerializeField] private int _health;
     
 
     // Start is called before the first frame update
@@ -53,12 +60,26 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Move();
-        if(Time.time > _canFire)
+        if (!_isBoss)
         {
-            _fireRate = Random.Range(3f, 5f);
-            _canFire = Time.time + _fireRate;
-            Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
+            if (Time.time > _canFire)
+            {
+                _fireRate = Random.Range(3f, 5f);
+                _canFire = Time.time + _fireRate;
+                Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
+            }
+        }else if (_isBoss)
+        {
+            if(Time.time > _canFireBoss)
+            {
+                _canFireBoss = Time.time + _bossFireRateMultiShot;
+                for(int i = 0; i <18; i++)
+                {
+                    Instantiate(_enemylaserPrefab, transform.position, Quaternion.Euler(0, 0, (i * 20)));
+                }
+            }
         }
+
     }
 
 
@@ -130,12 +151,23 @@ public class Enemy : MonoBehaviour
                 Destroy(collision.gameObject);
                 return;
             }
-            Destroy(collision.gameObject);
-            if(_player != null)
+            if(_health > 1)
             {
-                _player.AddScore();
+                _health--;
+                Destroy(collision.gameObject);
+                Debug.Log("Enemy health is " + _health);
+                return;
+            }else if(_health <= 1)
+            {
+                Destroy(collision.gameObject);
+                if (_player != null)
+                {
+                    _player.AddScore();
+                }
+                OnHit();
             }
-            OnHit();
+
+            
         }
         else if (collision.gameObject.tag == "Player")
         {
@@ -149,7 +181,15 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            OnHit();
+
+            if(_health > 1)
+            {
+                _health--;
+                return;
+            }else if(_health <= 1)
+            {
+                OnHit();
+            }
         }
     }
 
@@ -183,6 +223,9 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position,2);
+        if (_canDodge)
+        {
+            Gizmos.DrawWireSphere(transform.position, 2);
+        }
     }
 }
