@@ -280,6 +280,7 @@ public class Player : MonoBehaviour
         _uIManager.ActivateShieldImage();
         _uIManager.UpdateShield(_shieldHits);
         _shieldPrefab.SetActive(true);
+        _shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.cyan;
         Debug.Log("Shield hits is: " + _shieldHits);
     }
 
