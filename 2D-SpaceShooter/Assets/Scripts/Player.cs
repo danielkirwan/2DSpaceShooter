@@ -203,9 +203,15 @@ public class Player : MonoBehaviour
 
         if (_isShieldActive)
         {
-            if(_shieldHits > 1)
+            _shieldHits--;
+            if(_shieldHits == 2)
             {
-                _shieldHits--;
+                _shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.green;
+                _uIManager.UpdateShield(_shieldHits);
+                return;
+            }else if(_shieldHits == 1)
+            {
+                _shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.red;
                 _uIManager.UpdateShield(_shieldHits);
                 return;
             }
@@ -213,6 +219,18 @@ public class Player : MonoBehaviour
                 DeactivateShield();
                 return;
             }
+
+
+            //if(_shieldHits > 1)
+            //{
+            //    _shieldHits--;
+            //    _uIManager.UpdateShield(_shieldHits);
+            //    return;
+            //}
+            //else{
+            //    DeactivateShield();
+            //    return;
+            //}
         }
 
         _lives--;

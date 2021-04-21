@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour
 
     public void StartSpawning()
     {
-        StartCoroutine(GetBossComponent());
+        //StartCoroutine(GetBossComponent());
         StartCoroutine(SpawnEnemy());
         StartCoroutine(SpawnPowerUpRoutine());
     }
@@ -50,10 +50,10 @@ public class SpawnManager : MonoBehaviour
             float randY = Random.Range(-3.75f, 6f);
             GameObject enemySpawned = Instantiate(_enemyPrefab, new Vector3(12f, randY, 0), Quaternion.identity);
             enemySpawned.transform.SetParent(_spawnContainer.transform);
-            if (_enemy._isBoss)
-            {
-                StopSpawning();
-            }
+            //if (_enemy._isBoss)
+            //{
+            //    StopSpawning();
+            //}
             yield return new WaitForSeconds(5);
             
         }
