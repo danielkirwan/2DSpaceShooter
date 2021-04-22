@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject _enemylaserPrefab;
     [SerializeField] private GameObject _laserSpawnPoint;
     [SerializeField] private GameObject _shieldPrefab;
+    public HealthBarBehaviour _healthBar;
 
     private float _fireRate = 3.0f;
     private float _canFire = -1;
@@ -23,14 +24,13 @@ public class Enemy : MonoBehaviour
     private float _bossFireRateMultiShot = 5f;
     private float _canFireBoss = -1f;
 
-    private EnemyLaser _enemyLaser;
-
     [Header("Bools")]
     [SerializeField] private bool _hasShield = false;
     [SerializeField] private bool _canDodge = false;
     [SerializeField] public bool _isBoss = false;
     [Space]
-    [SerializeField] private int _health;
+    private float _health;
+    [SerializeField] private float _maxhealth;
     
 
     // Start is called before the first frame update
@@ -46,13 +46,8 @@ public class Enemy : MonoBehaviour
         {
             HasShield();
         }
-        //StartCoroutine(FireLaser());
-
-        _enemyLaser = _enemylaserPrefab.GetComponent<EnemyLaser>();
-        if(_enemyLaser == null)
-        {
-            Debug.Log("Enemy laser component empty");
-        }
+        _health = _maxhealth;
+        _healthBar.SetHealth(_maxhealth, _maxhealth);
     }
 
     private void Awake()
@@ -166,6 +161,7 @@ public class Enemy : MonoBehaviour
             if(_health > 1)
             {
                 _health--;
+                _healthBar.SetHealth(_health, _maxhealth);
                 Destroy(collision.gameObject);
                 return;
             }else if(_health <= 1)
