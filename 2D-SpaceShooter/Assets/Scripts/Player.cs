@@ -270,7 +270,6 @@ public class Player : MonoBehaviour
             _leftEngine.SetActive(false);
             return;
         }
-        
     }
 
     public void ActivateShield()

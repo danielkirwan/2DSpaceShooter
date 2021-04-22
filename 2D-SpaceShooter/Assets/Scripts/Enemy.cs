@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
     private float _bossFireRateMultiShot = 5f;
     private float _canFireBoss = -1f;
 
+    private EnemyLaser _enemyLaser;
+
     [Header("Bools")]
     [SerializeField] private bool _hasShield = false;
     [SerializeField] private bool _canDodge = false;
@@ -45,6 +47,12 @@ public class Enemy : MonoBehaviour
             HasShield();
         }
         //StartCoroutine(FireLaser());
+
+        _enemyLaser = _enemylaserPrefab.GetComponent<EnemyLaser>();
+        if(_enemyLaser == null)
+        {
+            Debug.Log("Enemy laser component empty");
+        }
     }
 
     private void Awake()
@@ -64,9 +72,17 @@ public class Enemy : MonoBehaviour
         {
             if (Time.time > _canFire)
             {
-                _fireRate = Random.Range(3f, 5f);
-                _canFire = Time.time + _fireRate;
-                Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
+                if(_player.gameObject.transform.position.x < this.transform.position.x)
+                {
+                    _fireRate = Random.Range(3f, 5f);
+                    _canFire = Time.time + _fireRate;
+                    Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
+                }else if(_player.gameObject.transform.position.x > this.transform.position.x)
+                {
+                    _fireRate = Random.Range(3f, 5f);
+                    _canFire = Time.time + _fireRate;
+                    Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.Euler(0,0,-180));
+                } 
             }
         }else if (_isBoss)
         {
@@ -95,12 +111,8 @@ public class Enemy : MonoBehaviour
 
             if(hitRay.collider != null)
             {
-
-
-                Debug.Log("Hit something");
                 if (hitRay.collider.gameObject.CompareTag("Ammo") || hitRay.collider.gameObject.CompareTag("Shield") || hitRay.collider.gameObject.CompareTag("Sboost"))
                 {
-                    Debug.Log("Detected " + hitRay.collider.name);
                     if(Time.time > _canFireAtPowerup)
                     {
                         _canFireAtPowerup = Time.time + _fireRatePowerUp;
@@ -155,7 +167,6 @@ public class Enemy : MonoBehaviour
             {
                 _health--;
                 Destroy(collision.gameObject);
-                Debug.Log("Enemy health is " + _health);
                 return;
             }else if(_health <= 1)
             {
