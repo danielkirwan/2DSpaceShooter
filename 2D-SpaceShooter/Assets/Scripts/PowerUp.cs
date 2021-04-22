@@ -6,17 +6,41 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField] private float _speed = 4f;
     [SerializeField] private int _powerupID;
+
+    private Transform _player;
+    private Rigidbody2D rb;
+    private float _rotationSpeed = 300f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3(-1, 0, 0) * _speed * Time.deltaTime, Space.World);
-        transform.Rotate(0, 0, 50 * Time.deltaTime); //rotates 50 degrees per second around z axis
+        
+    }
+
+    private void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.C))
+        {
+            Vector2 direction = (Vector2)_player.position - rb.position;
+            direction.Normalize();
+            float rotateAmount = Vector3.Cross(direction, transform.right).z;
+
+            rb.angularVelocity = -rotateAmount * _rotationSpeed;
+            rb.velocity = transform.right * _speed;
+        }
+        else
+        {
+            transform.Translate(new Vector3(-1, 0, 0) * _speed * Time.deltaTime, Space.World);
+            transform.Rotate(0, 0, 50 * Time.deltaTime); //rotates 50 degrees per second around z axis
+        }
+
+
     }
 
 
