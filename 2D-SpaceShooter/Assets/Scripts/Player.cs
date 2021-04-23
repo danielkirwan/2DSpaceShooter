@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [Header("Player attributes")]
     [SerializeField] private float _speed;
     [SerializeField] private int _lives = 3;
+    [SerializeField] private int _maxLives = 3;
     [SerializeField] private int _shieldHits = 3;
     private float _speedMultiplier = 2f;
     private float _thrusterMultiplier = 1.5f;
@@ -54,6 +55,7 @@ public class Player : MonoBehaviour
 
     public static AudioSource[] sfx;
     private CameraShake _cameraShake;
+    public Health _healthBar;
 
 
     // Start is called before the first frame update
@@ -75,6 +77,8 @@ public class Player : MonoBehaviour
         _currentAmmo = 15;
         sfx = GameObject.FindWithTag("GameData").GetComponentsInChildren<AudioSource>();
         _cameraShake = GameObject.Find("CameraShake").GetComponent<CameraShake>();
+        _lives = _maxLives;
+        _healthBar.SetHealth((float)_lives, (float)_maxLives);
     }
 
     // Update is called once per frame
@@ -245,6 +249,7 @@ public class Player : MonoBehaviour
         }
 
         _uIManager.UpdateLives(_lives);
+        _healthBar.SetHealth((float)_lives, (float)_maxLives);
 
         if (_lives < 1)
         {
@@ -260,6 +265,7 @@ public class Player : MonoBehaviour
         if (_lives == 3) return;
         _lives++;
         _uIManager.UpdateLives(_lives);
+        _healthBar.SetHealth((float)_lives, (float)_maxLives);
         if (_lives == 3)
         {
             _rightEngine.SetActive(false);

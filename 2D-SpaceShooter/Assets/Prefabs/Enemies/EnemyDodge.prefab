@@ -100,10 +100,11 @@ MonoBehaviour:
     type: 3}
   _laserSpawnPoint: {fileID: 8304516877452375130}
   _shieldPrefab: {fileID: 0}
+  _healthBar: {fileID: 0}
   _hasShield: 0
   _canDodge: 1
   _isBoss: 0
-  _health: 2
+  _maxhealth: 2
 --- !u!1 &4255359680103126078
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
             HasShield();
         }
         _health = _maxhealth;
-        _healthBar.SetHealth(_maxhealth, _maxhealth);
+        _healthBar.SetHealth(_health, _maxhealth);
     }
 
     private void Awake()
