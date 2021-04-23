@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     public Color _high;
     public Color _mid;
     public Vector3 offset;
+    public float number = 6f;
 
     public Image _healthImage;
     // Start is called before the first frame update
