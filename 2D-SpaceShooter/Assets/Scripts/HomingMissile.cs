@@ -13,7 +13,7 @@ public class HomingMissile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        _target = GameObject.FindGameObjectWithTag("Enemy").transform;
+        StartCoroutine(FindTarget());
     }
 
     // Update is called once per frame
@@ -24,11 +24,21 @@ public class HomingMissile : MonoBehaviour
             _target = GameObject.FindGameObjectWithTag("Enemy").transform;
         }
 
-        Vector2 direction = (Vector2)_target.position - rb.position;
-        direction.Normalize();
-        float rotateAmount = Vector3.Cross(direction, transform.right).z;
+        if(_target != null)
+        {
+            Vector2 direction = (Vector2)_target.position - rb.position;
+            direction.Normalize();
+            float rotateAmount = Vector3.Cross(direction, transform.right).z;
 
-        rb.angularVelocity = -rotateAmount * _rotateSpeed;
-        rb.velocity = transform.right * _speed;
+            rb.angularVelocity = -rotateAmount * _rotateSpeed;
+            rb.velocity = transform.right * _speed;
+        }
     }
+
+    IEnumerator FindTarget()
+    {
+        yield return new WaitForSeconds(.5f);
+        _target = GameObject.FindGameObjectWithTag("Enemy").transform;
+    }
+
 }

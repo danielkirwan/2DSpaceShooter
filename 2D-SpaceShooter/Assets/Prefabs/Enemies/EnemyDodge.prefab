@@ -244,6 +244,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089231108863907311}
     m_Modifications:
+    - target: {fileID: 478221211859216915, guid: 2060e31920d619640862dc8cd6c8fbba,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 478221211859216915, guid: 2060e31920d619640862dc8cd6c8fbba,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 478221211859216917, guid: 2060e31920d619640862dc8cd6c8fbba,
         type: 3}
       propertyPath: m_Sprite
@@ -259,6 +269,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 0.28891551
+      objectReference: {fileID: 0}
+    - target: {fileID: 478221211859216917, guid: 2060e31920d619640862dc8cd6c8fbba,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 478221211859216917, guid: 2060e31920d619640862dc8cd6c8fbba,
+        type: 3}
+      propertyPath: m_FillMethod
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 478221212832648721, guid: 2060e31920d619640862dc8cd6c8fbba,
         type: 3}
