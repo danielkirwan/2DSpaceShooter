@@ -22,19 +22,23 @@ public class Health : MonoBehaviour
         _healthImage.fillAmount = health / maxHealth;
         //_healthImage.color = Color.Lerp(_low, _high, 1f);
         float _newHealth = health / maxHealth;
-        if(_newHealth > .75f)
+        if (_newHealth == 1f)
         {
-            _healthImage.color = new Color(_high.r,_high.g, _high.g);
+            _healthImage.color = Color.green;
+        }
+        else if(_newHealth > .75f && _newHealth <1f)
+        {
+            _healthImage.color = new Color(_high.r,_high.g, _high.g, _high.a);
             //_healthImage.color = Color.Lerp(_high, _high, 1f);
         }
         else if(_newHealth >=.4f && _newHealth <= .75f)
         {
-             _healthImage.color = new Color(_mid.r, _mid.g, _mid.g);
+             _healthImage.color = new Color(_mid.r, _mid.g, _mid.g, _mid.a);
             //_healthImage.color = Color.Lerp(_mid, _high, 1f);
         }
         else if(_newHealth < .4f)
         {
-            _healthImage.color = new Color(_low.r, _low.g, _low.g);
+            _healthImage.color = new Color(_low.r, _low.g, _low.g,_low.a);
             //_healthImage.color = Color.Lerp(_low, _high, 1f);
         }
 

@@ -211,12 +211,12 @@ public class Player : MonoBehaviour
             if(_shieldHits == 2)
             {
                 _shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.green;
-                _uIManager.UpdateShield(_shieldHits);
+                //_uIManager.UpdateShield(_shieldHits);
                 return;
             }else if(_shieldHits == 1)
             {
                 _shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.red;
-                _uIManager.UpdateShield(_shieldHits);
+                //_uIManager.UpdateShield(_shieldHits);
                 return;
             }
             else{
@@ -248,7 +248,7 @@ public class Player : MonoBehaviour
             _leftEngine.SetActive(true);
         }
 
-        _uIManager.UpdateLives(_lives);
+        //_uIManager.UpdateLives(_lives);
         _healthBar.SetHealth((float)_lives, (float)_maxLives);
 
         if (_lives < 1)
@@ -264,7 +264,7 @@ public class Player : MonoBehaviour
     {
         if (_lives == 3) return;
         _lives++;
-        _uIManager.UpdateLives(_lives);
+        //_uIManager.UpdateLives(_lives);
         _healthBar.SetHealth((float)_lives, (float)_maxLives);
         if (_lives == 3)
         {
@@ -282,8 +282,8 @@ public class Player : MonoBehaviour
     {
         _isShieldActive = true;
         _shieldHits = 3;
-        _uIManager.ActivateShieldImage();
-        _uIManager.UpdateShield(_shieldHits);
+        //_uIManager.ActivateShieldImage();
+        //_uIManager.UpdateShield(_shieldHits);
         _shieldPrefab.SetActive(true);
         _shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.cyan;
         Debug.Log("Shield hits is: " + _shieldHits);

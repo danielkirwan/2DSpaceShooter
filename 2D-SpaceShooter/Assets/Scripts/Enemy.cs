@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject _enemylaserPrefab;
     [SerializeField] private GameObject _laserSpawnPoint;
     [SerializeField] private GameObject _shieldPrefab;
-    public HealthBarBehaviour _healthBar;
+    public Health _healthBar;
 
     private float _fireRate = 3.0f;
     private float _canFire = -1;
@@ -67,17 +67,21 @@ public class Enemy : MonoBehaviour
         {
             if (Time.time > _canFire)
             {
-                if(_player.gameObject.transform.position.x < this.transform.position.x)
+                if(_player != null)
                 {
-                    _fireRate = Random.Range(3f, 5f);
-                    _canFire = Time.time + _fireRate;
-                    Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
-                }else if(_player.gameObject.transform.position.x > this.transform.position.x)
-                {
-                    _fireRate = Random.Range(3f, 5f);
-                    _canFire = Time.time + _fireRate;
-                    Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.Euler(0,0,-180));
-                } 
+                    if (_player.gameObject.transform.position.x < this.transform.position.x)
+                    {
+                        _fireRate = Random.Range(3f, 5f);
+                        _canFire = Time.time + _fireRate;
+                        Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
+                    }
+                    else if (_player.gameObject.transform.position.x > this.transform.position.x)
+                    {
+                        _fireRate = Random.Range(3f, 5f);
+                        _canFire = Time.time + _fireRate;
+                        Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.Euler(0, 0, -180));
+                    }
+                }
             }
         }else if (_isBoss)
         {
@@ -98,45 +102,7 @@ public class Enemy : MonoBehaviour
     {
         if (_canDodge)
         {
-
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.left) * 10f, Color.red);
-
-            RaycastHit2D hitCircle = Physics2D.CircleCast(transform.position, 2, transform.TransformDirection(Vector2.left), 1 << LayerMask.NameToLayer("Laser"));
-            RaycastHit2D hitRay = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.left), 10f, 1 << LayerMask.NameToLayer("PowerUp"));
-
-            if(hitRay.collider != null)
-            {
-                if (hitRay.collider.gameObject.CompareTag("Ammo") || hitRay.collider.gameObject.CompareTag("Shield") || hitRay.collider.gameObject.CompareTag("Sboost"))
-                {
-                    if(Time.time > _canFireAtPowerup)
-                    {
-                        _canFireAtPowerup = Time.time + _fireRatePowerUp;
-                        Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
-                    }
-                    
-                }
-            }
-            
-            if(hitCircle.collider != null)
-            {
-                
-
-                if (hitCircle.collider.gameObject.CompareTag("Laser"))
-                {
-                    Vector3 hitCirclePoint = hitCircle.point;
-                    //Debug.Log("Hit point is " + hitCirclePoint);
-                    //Debug.Log("Enemy pos is " + this.transform.position);
-                    if (this.transform.position.y >= hitCirclePoint.y)
-                    {
-                        LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + 2f, this.transform.position.z), 0.5f);
-                    }else if(this.transform.position.y <= hitCirclePoint.y)
-                    {
-                        LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + -2f, this.transform.position.z), 0.5f);
-                    }
-                    _canDodge = false;
-                }
-            }
-
+            MoveDodgeEnemy();
         }
 
         transform.Translate(new Vector3(-1, 0, 0) * _speed * Time.deltaTime);
@@ -145,6 +111,48 @@ public class Enemy : MonoBehaviour
         {
             float randPosY = Random.Range(-3.75f, 6f);
             transform.position = new Vector3(12f, randPosY, 0);
+        }
+    }
+
+    void MoveDodgeEnemy()
+    {
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.left) * 10f, Color.red);
+
+        RaycastHit2D hitCircle = Physics2D.CircleCast(transform.position, 2, transform.TransformDirection(Vector2.left), 1 << LayerMask.NameToLayer("Laser"));
+        RaycastHit2D hitRay = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.left), 10f, 1 << LayerMask.NameToLayer("PowerUp"));
+
+        if (hitRay.collider != null)
+        {
+            if (hitRay.collider.gameObject.CompareTag("Ammo") || hitRay.collider.gameObject.CompareTag("Shield") || hitRay.collider.gameObject.CompareTag("Sboost"))
+            {
+                if (Time.time > _canFireAtPowerup)
+                {
+                    _canFireAtPowerup = Time.time + _fireRatePowerUp;
+                    Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
+                }
+
+            }
+        }
+
+        if (hitCircle.collider != null)
+        {
+
+
+            if (hitCircle.collider.gameObject.CompareTag("Laser"))
+            {
+                Vector3 hitCirclePoint = hitCircle.point;
+                //Debug.Log("Hit point is " + hitCirclePoint);
+                //Debug.Log("Enemy pos is " + this.transform.position);
+                if (this.transform.position.y >= hitCirclePoint.y)
+                {
+                    LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + 2f, this.transform.position.z), 0.5f);
+                }
+                else if (this.transform.position.y <= hitCirclePoint.y)
+                {
+                    LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + -2f, this.transform.position.z), 0.5f);
+                }
+                _canDodge = false;
+            }
         }
     }
 

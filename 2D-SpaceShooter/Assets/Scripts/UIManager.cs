@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour
     {
         _scoreText.text = "Score: " + 0;
         _restartLevel.gameObject.SetActive(false);
+        _livesImage.gameObject.SetActive(false);
+        _shieldImage.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
