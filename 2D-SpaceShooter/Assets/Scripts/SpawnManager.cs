@@ -87,13 +87,12 @@ public class SpawnManager : MonoBehaviour
             //spawn ammow
             Instantiate(_powerups[0], new Vector3(12f, randY, 0), Quaternion.identity);
             //Debug.Log("Spawning Ammo");
-            Debug.Log("Spawning triple shot");
         }
         else if(spawnRate >= 41 && spawnRate <= 60)
         {
             //spawn triple shot
             Instantiate(_powerups[1], new Vector3(12f, randY, 0), Quaternion.identity);
-            Debug.Log("Spawning ammo");
+            Debug.Log("Spawning triple shot");
         }
         else if(spawnRate >= 61 && spawnRate <= 70)
         {

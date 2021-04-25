@@ -2348,8 +2348,8 @@ MonoBehaviour:
     type: 3}
   _spawnContainer: {fileID: 1792464525}
   _powerups:
-  - {fileID: 6420130759021652602, guid: 1501336fd4c556c4f958f6aa57f98add, type: 3}
   - {fileID: 2709489020535937689, guid: 7547a359afe1ccc45ba30f8c773abc00, type: 3}
+  - {fileID: 6420130759021652602, guid: 1501336fd4c556c4f958f6aa57f98add, type: 3}
   - {fileID: 903251601736524776, guid: 663b7aa67dd598d43a4315e69db8a577, type: 3}
   - {fileID: 1592884491524539254, guid: 8d9ef1dbe3f9fe84aac5ed1fb0576e4b, type: 3}
   - {fileID: 8186611790767859026, guid: 749e0c11b24a8c84bbb6456be74baa61, type: 3}
