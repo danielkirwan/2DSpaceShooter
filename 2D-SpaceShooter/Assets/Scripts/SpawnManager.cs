@@ -64,10 +64,10 @@ public class SpawnManager : MonoBehaviour
     {
         while (!_stopSpawning)
         {
-            float randNum = Random.Range(5f, 7f);
-            float randY = Random.Range(-3.75f, 6f);
-            int randPowerUp = Random.Range(0, 7);
-            Instantiate(_powerups[randPowerUp], new Vector3(12f, randY, 0), Quaternion.identity);
+            float randNum = Random.Range(3f, 5f);
+            ChoosePowerUp();
+            //int randPowerUp = Random.Range(0, 7);
+            //Instantiate(_powerups[randPowerUp], new Vector3(12f, randY, 0), Quaternion.identity);
             yield return new WaitForSeconds(randNum);
         }
     }
@@ -77,5 +77,53 @@ public class SpawnManager : MonoBehaviour
         _stopSpawning = true;
     }
     
-
+    void ChoosePowerUp()
+    {
+        int spawnRate = Random.Range(1,101);
+        Debug.Log("SpawnRate is " + spawnRate);
+        float randY = Random.Range(-3.75f, 6f);
+        if (spawnRate >= 1 && spawnRate <= 40)
+        {
+            //spawn ammow
+            Instantiate(_powerups[0], new Vector3(12f, randY, 0), Quaternion.identity);
+            //Debug.Log("Spawning Ammo");
+            Debug.Log("Spawning triple shot");
+        }
+        else if(spawnRate >= 41 && spawnRate <= 60)
+        {
+            //spawn triple shot
+            Instantiate(_powerups[1], new Vector3(12f, randY, 0), Quaternion.identity);
+            Debug.Log("Spawning ammo");
+        }
+        else if(spawnRate >= 61 && spawnRate <= 70)
+        {
+            //spawn speed
+            Instantiate(_powerups[2], new Vector3(12f, randY, 0), Quaternion.identity);
+            //Debug.Log("Spawning Speed"); 
+        }
+        else if(spawnRate >=71 && spawnRate <= 80)
+        {
+            //spawn shield
+            Instantiate(_powerups[3], new Vector3(12f, randY, 0), Quaternion.identity);
+            //Debug.Log("Spawning shield");
+        }
+        else if(spawnRate >= 81 && spawnRate <= 90)
+        {
+            //spawn powerdown
+            Instantiate(_powerups[4], new Vector3(12f, randY, 0), Quaternion.identity);
+            //Debug.Log("Spawning powerdown");
+        }
+        else if(spawnRate >= 91 && spawnRate <= 95)
+        {
+            //spawn health
+            Instantiate(_powerups[5], new Vector3(12f, randY, 0), Quaternion.identity);
+            //Debug.Log("Spawning health");
+        }
+        else if(spawnRate >=96 && spawnRate <= 100)
+        {
+            //spawn homing missile
+            Instantiate(_powerups[6], new Vector3(12f, randY, 0), Quaternion.identity);
+            //Debug.Log("Spawning Homing missile");
+        }
+    }
 }
