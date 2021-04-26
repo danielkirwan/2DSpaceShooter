@@ -105,12 +105,31 @@ public class Enemy : MonoBehaviour
             MoveDodgeEnemy();
         }
 
+        if (_hasShield)
+        {
+            MoveShieldEnemy();
+        }
+
         transform.Translate(new Vector3(-1, 0, 0) * _speed * Time.deltaTime);
 
         if (transform.position.x <= -12f)
         {
             float randPosY = Random.Range(-3.75f, 6f);
             transform.position = new Vector3(12f, randPosY, 0);
+        }
+    }
+
+    void MoveShieldEnemy()
+    {
+        LeanTween.init(800);
+        //LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + 2f, this.transform.position.z), 1f);
+        if (this.transform.position.y <= -2f)
+        {
+            LeanTween.moveY(this.gameObject, this.transform.position.y + 2f, 2f);
+        }
+        else if (this.transform.position.y >= 4f)
+        {
+            LeanTween.moveY(this.gameObject, this.transform.position.y + -2f, 2f);
         }
     }
 
