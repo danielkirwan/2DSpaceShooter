@@ -15,6 +15,7 @@ TagManager:
   - Ammo
   - CameraShake
   - EnemyShield
+  - TripleShot
   layers:
   - Default
   - TransparentFX

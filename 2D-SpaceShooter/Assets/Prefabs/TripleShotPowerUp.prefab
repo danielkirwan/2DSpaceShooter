@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6420130759021652596}
   - component: {fileID: 6420130759021652603}
   - component: {fileID: 6420130759021652599}
-  - component: {fileID: 6420130759021652598}
+  - component: {fileID: 9160799031296239965}
   m_Layer: 0
   m_Name: TripleShotPowerUp
-  m_TagString: Tshot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
-  _powerupID: 0
+  _powerupID: 7
 --- !u!50 &6420130759021652599
 Rigidbody2D:
   serializedVersion: 4
@@ -119,8 +119,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &6420130759021652598
-CircleCollider2D:
+--- !u!70 &9160799031296239965
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -132,6 +132,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.07557297}
-  serializedVersion: 2
-  m_Radius: 1.4263978
+  m_Offset: {x: -0.0047801803, y: 0.0014947953}
+  m_Size: {x: 0.23254985, y: 0.23254986}
+  m_Direction: 0

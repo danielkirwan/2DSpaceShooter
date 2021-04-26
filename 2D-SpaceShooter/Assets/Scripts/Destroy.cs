@@ -15,7 +15,7 @@ public class Destroy : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if(other.gameObject.tag == "Tshot")
+        if(other.gameObject.tag == "TripleShot")
         {
             Destroy(other.gameObject);
         }

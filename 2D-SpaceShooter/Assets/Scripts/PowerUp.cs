@@ -40,7 +40,10 @@ public class PowerUp : MonoBehaviour
             transform.Rotate(0, 0, 50 * Time.deltaTime); //rotates 50 degrees per second around z axis
         }
 
-
+        if(_powerupID == 7 && transform.position.x <=-13f)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 
@@ -81,6 +84,10 @@ public class PowerUp : MonoBehaviour
                         player.AmmoDeplete();
                         Player.sfx[6].Play();
                         break;
+                    case 7:
+                        player.TripleShotActive();
+                        Player.sfx[5].Play();
+                        break;
                     default:
                         Debug.Log("Default case");
                         break;
@@ -88,6 +95,8 @@ public class PowerUp : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+
+        
 
         if(collision.gameObject.tag == "EnemyLaser")
         {

@@ -91,7 +91,7 @@ public class SpawnManager : MonoBehaviour
         else if(spawnRate >= 41 && spawnRate <= 60)
         {
             //spawn triple shot
-            Instantiate(_powerups[1], new Vector3(12f, randY, 0), Quaternion.identity);
+            Instantiate(_powerups[7], new Vector3(12f, randY, 0), Quaternion.identity);
             Debug.Log("Spawning triple shot");
         }
         else if(spawnRate >= 61 && spawnRate <= 70)
