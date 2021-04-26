@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Move();
-        if (!_isBoss)
+        if (!_isBoss && !_hasShield)
         {
             if (Time.time > _canFire)
             {
@@ -91,6 +91,18 @@ public class Enemy : MonoBehaviour
                 for(int i = 0; i <18; i++)
                 {
                     Instantiate(_enemylaserPrefab, transform.position, Quaternion.Euler(0, 0, (i * 20)));
+                }
+            }
+        }else if (_hasShield)
+        {
+            if(Time.time > _canFire)
+            {
+                _fireRate = Random.Range(3f, 5f);
+                _canFire = Time.time + _fireRate;
+                int[] pos = { -10, -5, 0, 5, 10 };
+                for(int i = 0; i < pos.Length; i++)
+                {
+                    Instantiate(_enemylaserPrefab, transform.position, Quaternion.Euler(0, 0, (pos[i])));
                 }
             }
         }
@@ -247,6 +259,7 @@ public class Enemy : MonoBehaviour
     {
         _hasShield = true;
         _shieldPrefab.SetActive(true);
+        _shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.red;
     }
 
     void DeactivateShield()
