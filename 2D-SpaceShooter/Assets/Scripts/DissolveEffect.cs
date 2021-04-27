@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class DissolveEffect : MonoBehaviour
 {
-    [SerializeField] private Material _material;
+    //[SerializeField] private Material _material;
     private float _dissolveAmount;
     private bool _isDissolving;
     private float _dissolveSpeed;
+    //Allows access to the renderer material instance.
+    [SerializeField] private Renderer _material;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,22 +23,22 @@ public class DissolveEffect : MonoBehaviour
         if (_isDissolving)
         {
             _dissolveAmount = Mathf.Clamp01(_dissolveAmount + _dissolveSpeed * Time.deltaTime);
-            _material.SetFloat("_dissolveAmount", _dissolveAmount);
+            _material.material.SetFloat("_dissolveAmount", _dissolveAmount);
         }
         else
         {
             _dissolveAmount = Mathf.Clamp01(_dissolveAmount - _dissolveSpeed * Time.deltaTime);
-            _material.SetFloat("_dissolveAmount", _dissolveAmount);
+            _material.material.SetFloat("_dissolveAmount", _dissolveAmount);
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            _isDissolving = true;
+            StartDissolve(1f);
         }
 
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            _isDissolving = false;
+            StopDissolve(1f);
         }
     }
 
@@ -53,6 +56,6 @@ public class DissolveEffect : MonoBehaviour
         Debug.Log("Enabling shield");
     }
 
-
+    
 
 }

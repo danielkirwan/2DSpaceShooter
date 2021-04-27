@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
         _healthBar.SetHealth((float)_lives, (float)_maxLives);
 
         _dissolveEffect = _shieldPrefab.GetComponentInChildren<DissolveEffect>();
+        _dissolveEffect.StartDissolve(1f);
     }
 
     // Update is called once per frame
@@ -284,11 +285,12 @@ public class Player : MonoBehaviour
     public void ActivateShield()
     {
         _isShieldActive = true;
+        _shieldPrefab.SetActive(true);
         _dissolveEffect.StopDissolve(1f);
         _shieldHits = 3;
         //_uIManager.ActivateShieldImage();
         //_uIManager.UpdateShield(_shieldHits);
-        _shieldPrefab.SetActive(true);
+        
         _shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.cyan;
         Debug.Log("Shield hits is: " + _shieldHits);
     }
@@ -298,6 +300,11 @@ public class Player : MonoBehaviour
         _dissolveEffect.StartDissolve(1f);
         _isShieldActive = false;
         //_uIManager.DeactivateShieldImage();
+        Invoke("EndShield", 1f);
+    }
+
+    void EndShield()
+    {
         _shieldPrefab.SetActive(false);
     }
 

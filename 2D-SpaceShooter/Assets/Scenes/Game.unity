@@ -3040,8 +3040,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shield2
       objectReference: {fileID: 0}
+    - target: {fileID: 3326640728430171866, guid: 75f2728869360f04e8228a9a279124e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326640729860599617, guid: 75f2728869360f04e8228a9a279124e0,
+        type: 3}
+      propertyPath: _material
+      value: 
+      objectReference: {fileID: 3326640728637180981}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75f2728869360f04e8228a9a279124e0, type: 3}
+--- !u!212 &3326640728637180981 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3326640729860599618, guid: 75f2728869360f04e8228a9a279124e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3326640728637180980}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5406011917721226387
 PrefabInstance:
   m_ObjectHideFlags: 0
