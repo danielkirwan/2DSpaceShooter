@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private float _thrusterMultiplier = 1.5f;
     private int _maxAmmo = 15;
     private int _currentAmmo;
+    DissolveEffect _dissolveEffect;
 
     [Space]
 
@@ -79,6 +80,8 @@ public class Player : MonoBehaviour
         _cameraShake = GameObject.Find("CameraShake").GetComponent<CameraShake>();
         _lives = _maxLives;
         _healthBar.SetHealth((float)_lives, (float)_maxLives);
+
+        _dissolveEffect = _shieldPrefab.GetComponentInChildren<DissolveEffect>();
     }
 
     // Update is called once per frame
@@ -281,6 +284,7 @@ public class Player : MonoBehaviour
     public void ActivateShield()
     {
         _isShieldActive = true;
+        _dissolveEffect.StopDissolve(1f);
         _shieldHits = 3;
         //_uIManager.ActivateShieldImage();
         //_uIManager.UpdateShield(_shieldHits);
@@ -291,8 +295,9 @@ public class Player : MonoBehaviour
 
     void DeactivateShield()
     {
+        _dissolveEffect.StartDissolve(1f);
         _isShieldActive = false;
-        _uIManager.DeactivateShieldImage();
+        //_uIManager.DeactivateShieldImage();
         _shieldPrefab.SetActive(false);
     }
 

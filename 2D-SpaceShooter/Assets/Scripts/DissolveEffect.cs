@@ -43,12 +43,14 @@ public class DissolveEffect : MonoBehaviour
     {
         _isDissolving = true;
         this._dissolveSpeed = speed;
+        Debug.Log("Dissolving shield");
     }
 
     public void StopDissolve(float speed)
     {
         _isDissolving = false;
         this._dissolveSpeed = speed;
+        Debug.Log("Enabling shield");
     }
 
 
