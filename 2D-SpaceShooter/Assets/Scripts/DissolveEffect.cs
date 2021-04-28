@@ -8,6 +8,10 @@ public class DissolveEffect : MonoBehaviour
     private float _dissolveAmount;
     private bool _isDissolving;
     private float _dissolveSpeed;
+    private float _hitAmount;
+    private float _nextDissolveAmount = 1f;
+
+    private bool _shieldHit = false;
     //Allows access to the renderer material instance.
     [SerializeField] private Renderer _material;
 
@@ -31,6 +35,18 @@ public class DissolveEffect : MonoBehaviour
             _material.material.SetFloat("_dissolveAmount", _dissolveAmount);
         }
 
+        if (_shieldHit)
+        {
+            //_dissolveAmount = (_hitAmount + _dissolveSpeed * Time.deltaTime);
+            _dissolveAmount = Mathf.Clamp(_dissolveAmount - _dissolveSpeed * Time.deltaTime, _hitAmount, _nextDissolveAmount);
+            //_dissolveAmount = Mathf.Clamp01(_hitAmount + _dissolveSpeed * Time.deltaTime);
+            //Debug.Log("Dissolve amount is " + _dissolveAmount);
+            _material.material.SetFloat("_dissolveAmount", _dissolveAmount);
+
+            
+        }
+        
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             StartDissolve(1f);
@@ -42,20 +58,49 @@ public class DissolveEffect : MonoBehaviour
         }
     }
 
+    public void ShieldHit(float hitAmount, float speed)
+    {
+        _shieldHit = true;
+        _hitAmount = hitAmount;
+        _dissolveSpeed = speed;
+
+        if(_hitAmount == 0.4f)
+        {
+            _nextDissolveAmount = 0.6f;
+        }else if (_hitAmount == 0.6f)
+        {
+            _nextDissolveAmount = 1f;
+        }
+
+    }
+
     public void StartDissolve(float speed)
     {
         _isDissolving = true;
         this._dissolveSpeed = speed;
-        Debug.Log("Dissolving shield");
     }
 
     public void StopDissolve(float speed)
     {
         _isDissolving = false;
+        _shieldHit = false;
         this._dissolveSpeed = speed;
-        Debug.Log("Enabling shield");
     }
 
-    
+    public void ChangeShieldColour(int colour)
+    {
+        if(colour == 3)
+        {
+            _material.material.color = Color.cyan;
+        }
+        else if(colour == 2)
+        {
+            _material.material.color = Color.green;
+        }
+        else if(colour == 1)
+        {
+            _material.material.color = Color.red;
+        }
+    }
 
 }

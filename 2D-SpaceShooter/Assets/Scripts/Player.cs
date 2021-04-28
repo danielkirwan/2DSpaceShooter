@@ -214,12 +214,16 @@ public class Player : MonoBehaviour
             _shieldHits--;
             if(_shieldHits == 2)
             {
-                _shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.green;
+                //_shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.green;
+                //_dissolveEffect.ChangeShieldColour(2);
+                _dissolveEffect.ShieldHit(.4f, 1f);
                 //_uIManager.UpdateShield(_shieldHits);
                 return;
             }else if(_shieldHits == 1)
             {
-                _shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.red;
+                // _shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.red;
+                //_dissolveEffect.ChangeShieldColour(1);
+                _dissolveEffect.ShieldHit(.6f, 1f);
                 //_uIManager.UpdateShield(_shieldHits);
                 return;
             }
@@ -290,8 +294,10 @@ public class Player : MonoBehaviour
         _shieldHits = 3;
         //_uIManager.ActivateShieldImage();
         //_uIManager.UpdateShield(_shieldHits);
+
+        //_shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.cyan;
+        _dissolveEffect.ChangeShieldColour(3);
         
-        _shieldPrefab.GetComponentInChildren<Renderer>().material.color = Color.cyan;
         Debug.Log("Shield hits is: " + _shieldHits);
     }
 
