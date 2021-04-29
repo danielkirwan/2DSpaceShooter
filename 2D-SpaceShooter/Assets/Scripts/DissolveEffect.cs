@@ -38,12 +38,10 @@ public class DissolveEffect : MonoBehaviour
         if (_shieldHit)
         {
             //_dissolveAmount = (_hitAmount + _dissolveSpeed * Time.deltaTime);
-            _dissolveAmount = Mathf.Clamp(_dissolveAmount - _dissolveSpeed * Time.deltaTime, _hitAmount, _nextDissolveAmount);
+            _dissolveAmount = Mathf.Clamp(_dissolveAmount + _dissolveSpeed * Time.deltaTime, _hitAmount, _nextDissolveAmount);
             //_dissolveAmount = Mathf.Clamp01(_hitAmount + _dissolveSpeed * Time.deltaTime);
             //Debug.Log("Dissolve amount is " + _dissolveAmount);
             _material.material.SetFloat("_dissolveAmount", _dissolveAmount);
-
-            
         }
         
 
@@ -69,7 +67,8 @@ public class DissolveEffect : MonoBehaviour
             _nextDissolveAmount = 0.6f;
         }else if (_hitAmount == 0.6f)
         {
-            _nextDissolveAmount = 1f;
+            _dissolveAmount = 1f;
+            StartDissolve(_dissolveSpeed);
         }
 
     }

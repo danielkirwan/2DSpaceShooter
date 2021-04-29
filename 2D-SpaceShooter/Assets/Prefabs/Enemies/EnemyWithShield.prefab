@@ -339,6 +339,7 @@ MonoBehaviour:
   _canDodge: 0
   _isBoss: 0
   _maxhealth: 1
+  enemyType: 2
 --- !u!1001 &1360666613
 PrefabInstance:
   m_ObjectHideFlags: 0

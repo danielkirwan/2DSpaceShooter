@@ -136,6 +136,7 @@ MonoBehaviour:
   _canDodge: 0
   _isBoss: 1
   _maxhealth: 10
+  enemyType: 3
 --- !u!1 &8769940463324671054
 GameObject:
   m_ObjectHideFlags: 0

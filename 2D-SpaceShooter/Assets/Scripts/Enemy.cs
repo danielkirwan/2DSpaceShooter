@@ -31,7 +31,16 @@ public class Enemy : MonoBehaviour
     [Space]
     private float _health;
     [SerializeField] private float _maxhealth;
-    
+
+    public enum _enemyType
+    {
+        normal, 
+        dodge, 
+        shielded, 
+        boss
+    }
+
+    [SerializeField] private _enemyType enemyType;
 
     // Start is called before the first frame update
     void Start()
@@ -42,12 +51,17 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Enemy animator is null");
         }
-        if(_hasShield == true)
+        if(enemyType.Equals(_enemyType.shielded))
         {
             HasShield();
         }
         _health = _maxhealth;
         _healthBar.SetHealth(_health, _maxhealth);
+
+        if (!enemyType.Equals(_enemyType.shielded))
+        {
+            Debug.Log("Not shielded enemy");
+        }
     }
 
     private void Awake()
@@ -112,12 +126,23 @@ public class Enemy : MonoBehaviour
 
     void Move()
     {
-        if (_canDodge)
+        //if (_canDodge)
+        //{
+        //    MoveDodgeEnemy();
+        //}
+
+        if (enemyType.Equals(_enemyType.dodge))
         {
             MoveDodgeEnemy();
+            Debug.Log("Moving dodge enemy");
         }
 
-        if (_hasShield)
+        //if (_hasShield)
+        //{
+        //    MoveShieldEnemy();
+        //}
+
+        if (enemyType.Equals(_enemyType.shielded))
         {
             MoveShieldEnemy();
         }
@@ -147,44 +172,48 @@ public class Enemy : MonoBehaviour
 
     void MoveDodgeEnemy()
     {
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.left) * 10f, Color.red);
-
-        RaycastHit2D hitCircle = Physics2D.CircleCast(transform.position, 2, transform.TransformDirection(Vector2.left), 1 << LayerMask.NameToLayer("Laser"));
-        RaycastHit2D hitRay = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.left), 10f, 1 << LayerMask.NameToLayer("PowerUp"));
-
-        if (hitRay.collider != null)
+        if (_canDodge)
         {
-            if (hitRay.collider.gameObject.CompareTag("Ammo") || hitRay.collider.gameObject.CompareTag("Shield") || hitRay.collider.gameObject.CompareTag("Sboost"))
-            {
-                if (Time.time > _canFireAtPowerup)
-                {
-                    _canFireAtPowerup = Time.time + _fireRatePowerUp;
-                    Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
-                }
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.left) * 10f, Color.red);
 
+            RaycastHit2D hitCircle = Physics2D.CircleCast(transform.position, 2, transform.TransformDirection(Vector2.left), 1 << LayerMask.NameToLayer("Laser"));
+            RaycastHit2D hitRay = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.left), 10f, 1 << LayerMask.NameToLayer("PowerUp"));
+
+            if (hitRay.collider != null)
+            {
+                if (hitRay.collider.gameObject.CompareTag("Ammo") || hitRay.collider.gameObject.CompareTag("Shield") || hitRay.collider.gameObject.CompareTag("Sboost"))
+                {
+                    if (Time.time > _canFireAtPowerup)
+                    {
+                        _canFireAtPowerup = Time.time + _fireRatePowerUp;
+                        Instantiate(_enemylaserPrefab, _laserSpawnPoint.transform.position, Quaternion.identity);
+                    }
+
+                }
+            }
+
+            if (hitCircle.collider != null)
+            {
+
+
+                if (hitCircle.collider.gameObject.CompareTag("Laser"))
+                {
+                    Vector3 hitCirclePoint = hitCircle.point;
+                    //Debug.Log("Hit point is " + hitCirclePoint);
+                    //Debug.Log("Enemy pos is " + this.transform.position);
+                    if (this.transform.position.y >= hitCirclePoint.y)
+                    {
+                        LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + 2f, this.transform.position.z), 0.5f);
+                    }
+                    else if (this.transform.position.y <= hitCirclePoint.y)
+                    {
+                        LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + -2f, this.transform.position.z), 0.5f);
+                    }
+                    _canDodge = false;
+                }
             }
         }
-
-        if (hitCircle.collider != null)
-        {
-
-
-            if (hitCircle.collider.gameObject.CompareTag("Laser"))
-            {
-                Vector3 hitCirclePoint = hitCircle.point;
-                //Debug.Log("Hit point is " + hitCirclePoint);
-                //Debug.Log("Enemy pos is " + this.transform.position);
-                if (this.transform.position.y >= hitCirclePoint.y)
-                {
-                    LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + 2f, this.transform.position.z), 0.5f);
-                }
-                else if (this.transform.position.y <= hitCirclePoint.y)
-                {
-                    LeanTween.move(this.gameObject, new Vector3(this.transform.position.x + -1f, this.transform.position.y + -2f, this.transform.position.z), 0.5f);
-                }
-                _canDodge = false;
-            }
-        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

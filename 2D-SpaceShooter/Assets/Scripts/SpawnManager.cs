@@ -99,36 +99,6 @@ public class SpawnManager : MonoBehaviour
     {
         //int spawnRate = Random.Range(1,101);
         float randY = Random.Range(-3.75f, 6f);
-        //if (spawnRate >= 1 && spawnRate <= 40)
-        //{
-        //    Instantiate(_powerups[0], new Vector3(12f, randY, 0), Quaternion.identity);
-        //}
-        //else if(spawnRate >= 41 && spawnRate <= 60)
-        //{
-        //    Instantiate(_powerups[7], new Vector3(12f, randY, 0), Quaternion.identity);
-        //}
-        //else if(spawnRate >= 61 && spawnRate <= 70)
-        //{
-        //    Instantiate(_powerups[2], new Vector3(12f, randY, 0), Quaternion.identity);
-        //}
-        //else if(spawnRate >=71 && spawnRate <= 80)
-        //{
-        //    Instantiate(_powerups[3], new Vector3(12f, randY, 0), Quaternion.identity);
-        //}
-        //else if(spawnRate >= 81 && spawnRate <= 90)
-        //{
-        //    Instantiate(_powerups[4], new Vector3(12f, randY, 0), Quaternion.identity);
-        //}
-        //else if(spawnRate >= 91 && spawnRate <= 95)
-        //{
-        //    Instantiate(_powerups[5], new Vector3(12f, randY, 0), Quaternion.identity);
-        //}
-        //else if(spawnRate >=96 && spawnRate <= 100)
-        //{
-        //    Instantiate(_powerups[6], new Vector3(12f, randY, 0), Quaternion.identity);
-        //}
-
-
 
         randomNumber = Random.Range(0, totalWeight);
         //Debug.Log("Random number is " + randomNumber);
