@@ -136,6 +136,7 @@ MonoBehaviour:
   _canDodge: 0
   _isBoss: 0
   _maxhealth: 2
+  enemyType: 0
 --- !u!1 &8787252000974445494
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +245,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2350463476251908711}
     m_Modifications:
+    - target: {fileID: 478221211859216917, guid: 2060e31920d619640862dc8cd6c8fbba,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 56f1dc10c897adb4eb4b41eb6d576eef,
+        type: 3}
     - target: {fileID: 478221212832648721, guid: 2060e31920d619640862dc8cd6c8fbba,
         type: 3}
       propertyPath: m_Pivot.x
