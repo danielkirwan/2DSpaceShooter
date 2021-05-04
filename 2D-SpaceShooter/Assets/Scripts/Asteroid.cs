@@ -8,14 +8,20 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private GameObject _explosion;
     private SpawnManager _spawnManager;
     private Vignette _vignette;
+    private WaveSpawner _waveSpawner;
     // Start is called before the first frame update
     void Start()
     {
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         _vignette = GameObject.Find("StartVignette").GetComponent<Vignette>();
+        _waveSpawner = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
         if (_vignette == null)
         {
             Debug.Log("Vignette is empty");
+        }
+        if(_waveSpawner == null)
+        {
+            Debug.Log("Wave spawner is null");
         }
         
     }
@@ -34,6 +40,7 @@ public class Asteroid : MonoBehaviour
             GameObject explosion = Instantiate(_explosion, this.transform.position, Quaternion.identity);
             Destroy(collision.gameObject);
             _spawnManager.StartSpawning();
+            _waveSpawner.SpawnWave();
             _vignette.PlayVignetteAnimation();
             Player.sfx[2].Play();
             Destroy(this.gameObject, 0.3f);

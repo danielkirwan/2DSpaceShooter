@@ -2137,6 +2137,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37c185b1844ccb439c7d0c7337c7bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waves:
+  - waveName: Wave 1
+    numberOfEnemies: 10
+    typeOfEnemies:
+    - {fileID: 7814672909770499250, guid: bf2a58e8710ff864cb9e08fe78031cc6, type: 3}
+    spawnInterval: 2
+  - waveName: Wave 2
+    numberOfEnemies: 15
+    typeOfEnemies:
+    - {fileID: 7814672909770499250, guid: bf2a58e8710ff864cb9e08fe78031cc6, type: 3}
+    - {fileID: 3355128592022383418, guid: 4c305d499df7c614ba4ff8579398dc50, type: 3}
+    spawnInterval: 2
+  - waveName: Wave 3
+    numberOfEnemies: 20
+    typeOfEnemies:
+    - {fileID: 7814672909770499250, guid: bf2a58e8710ff864cb9e08fe78031cc6, type: 3}
+    - {fileID: 3355128592022383418, guid: 4c305d499df7c614ba4ff8579398dc50, type: 3}
+    - {fileID: 8569407860030151681, guid: ca845c7f713f9ad4999215cc80d59de7, type: 3}
+    spawnInterval: 2
+  - waveName: Wave 4
+    numberOfEnemies: 1
+    typeOfEnemies:
+    - {fileID: 7797079893385909066, guid: 9c9f70d5aa705af4c959ae058926bcb6, type: 3}
+    spawnInterval: 0
+  spawnPoints:
+  - {fileID: 1463750864}
+  - {fileID: 595781203}
+  - {fileID: 1821584075}
+  - {fileID: 732407487}
+  - {fileID: 1961179559}
+  - {fileID: 1586569912}
+  - {fileID: 326070861}
+  - {fileID: 2030371514}
+  - {fileID: 1778268682}
+  - {fileID: 347914062}
+  - {fileID: 1865598775}
+  spawnContainer: {fileID: 1736812833}
 --- !u!4 &1567153225
 Transform:
   m_ObjectHideFlags: 0
@@ -2149,6 +2186,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1729725458}
+  - {fileID: 1736812834}
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2560,6 +2598,36 @@ Transform:
   - {fileID: 1865598775}
   m_Father: {fileID: 1567153225}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1736812833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1736812834}
+  m_Layer: 0
+  m_Name: EnemyContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1736812834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736812833}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1567153225}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1749495522
 GameObject:
