@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Wave
@@ -19,15 +20,24 @@ public class WaveSpawner : MonoBehaviour
     private Wave currentWave;
     private int currentWaveNumber;
     public GameObject spawnContainer;
+    public Animator anim;
+    public Text waveName;
 
     private float nextSpawnTime;
 
     private bool canSpawn = false;
     private bool startSpawn = false;
+    private bool canAnimateWave = false;
+    private UIManager _uiManager;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        if(_uiManager == null)
+        {
+            Debug.Log("Uimanager is null");
+        }
     }
 
     // Update is called once per frame
@@ -37,10 +47,24 @@ public class WaveSpawner : MonoBehaviour
         SpawnWave();
 
         GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if(totalEnemies.Length == 0 && !canSpawn && startSpawn && currentWaveNumber+1 != waves.Length)
+        if(totalEnemies.Length == 0 && startSpawn)
         {
-               
+            if (currentWaveNumber + 1 != waves.Length)
+            {
+                if (canAnimateWave)
+                {
+                    waveName.text = waves[currentWaveNumber + 1].waveName;
+                    anim.SetTrigger("WaveComplete");
+                    canAnimateWave = false;
+                }
+            }
+            else
+            {
+                _uiManager.GameOverText();
+            }
+            
         }
+        
 
     }
 
@@ -63,6 +87,7 @@ public class WaveSpawner : MonoBehaviour
             if(currentWave.numberOfEnemies == 0)
             {
                 canSpawn = false;
+                canAnimateWave = true;
             }
         } 
     }
