@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
 
         if (!enemyType.Equals(_enemyType.shielded))
         {
-            Debug.Log("Not shielded enemy");
+            //Debug.Log("Not shielded enemy");
         }
     }
 

@@ -6,6 +6,7 @@ public class Asteroid : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private GameObject _explosion;
+    [SerializeField] private GameObject _startText;
     private SpawnManager _spawnManager;
     private Vignette _vignette;
     private WaveSpawner _waveSpawner;
@@ -23,7 +24,7 @@ public class Asteroid : MonoBehaviour
         {
             Debug.Log("Wave spawner is null");
         }
-        
+        _startText.SetActive(true);
     }
 
     // Update is called once per frame
@@ -40,7 +41,9 @@ public class Asteroid : MonoBehaviour
             GameObject explosion = Instantiate(_explosion, this.transform.position, Quaternion.identity);
             Destroy(collision.gameObject);
             _spawnManager.StartSpawning();
-            _waveSpawner.SpawnWave();
+            //_waveSpawner.SpawnWave();
+            _waveSpawner.StartSpawningWave();
+            _startText.SetActive(false);
             _vignette.PlayVignetteAnimation();
             Player.sfx[2].Play();
             Destroy(this.gameObject, 0.3f);
