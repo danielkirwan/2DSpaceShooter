@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameData : MonoBehaviour
 {
     public static GameData _singleton;
+    public GameObject _musicSlider;
+    public GameObject _soundSlider;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,11 +18,14 @@ public class GameData : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         _singleton = this;
 
+        StartCoroutine(GetOptionsSliders());
+
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator GetOptionsSliders()
     {
-        
+        yield return new WaitForSeconds(1);
+        _musicSlider.GetComponent<UpdateMusic>().Start();
+        _soundSlider.GetComponent<UpdateSound>().Start();
     }
 }
