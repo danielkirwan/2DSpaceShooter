@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     public static AudioSource[] sfx;
     private CameraShake _cameraShake;
     public Health _healthBar;
+    public TShotTimer _tShotTimer;
 
 
     // Start is called before the first frame update
@@ -317,6 +318,7 @@ public class Player : MonoBehaviour
     public void TripleShotActive()
     {
         _isTripleShotActive = true;
+        _tShotTimer.ActivateAnimation();
         StartCoroutine(PowerdownTripleShotRoutine());
     }
 
@@ -335,6 +337,7 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         _isTripleShotActive = false;
+        _tShotTimer.DeactivateAnimation();
     }
 
     public void SpeedBoostActive()

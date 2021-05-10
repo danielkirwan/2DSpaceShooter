@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text _scoreText;
     [SerializeField] private Text _gameOverText;
     [SerializeField] private Text _restartLevel;
+    [SerializeField] private Text _backToMainMenu;
+    [SerializeField] private Text _pauseText;
     [Space]
     [Header("Images")]
     [SerializeField] private Sprite[] _lives;
@@ -20,8 +22,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _bulletImage;
     [Space]
     [SerializeField] private GameObject _shieldImageObject;
+    [Space]
+    [SerializeField] private Button _resumeButton;
 
     private bool _isGameOver = false;
+    private bool _isPaused = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +34,8 @@ public class UIManager : MonoBehaviour
         _restartLevel.gameObject.SetActive(false);
         _livesImage.gameObject.SetActive(false);
         _shieldImage.gameObject.SetActive(false);
+        _resumeButton.gameObject.SetActive(false);
+        _pauseText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,8 +47,42 @@ public class UIManager : MonoBehaviour
             {
                 SceneManager.LoadScene("Game", LoadSceneMode.Single);
             }
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+            }
         }
+
+        if (_isPaused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
+        
     }
+
+    public void ResumePlay()
+    {
+        _isPaused = false;
+        _resumeButton.gameObject.SetActive(false);
+        _pauseText.gameObject.SetActive(false);
+    }
+
+    void PauseGame()
+    {
+        _isPaused = true;
+        _resumeButton.gameObject.SetActive(true);
+        _pauseText.gameObject.SetActive(true);
+    }
+
 
     public void UpdateBullets(int bullets)
     {
@@ -77,6 +118,7 @@ public class UIManager : MonoBehaviour
     {
         _gameOverText.gameObject.SetActive(true);
         _restartLevel.gameObject.SetActive(true);
+        _backToMainMenu.gameObject.SetActive(true);
         _isGameOver = true;
         StartCoroutine(GameOverTextRoutine());
     }

@@ -30,7 +30,6 @@ public class SpawnManager : MonoBehaviour
             totalWeight += item;
             
         }
-        Debug.Log("Weight is " + totalWeight);
     }
 
     // Update is called once per frame

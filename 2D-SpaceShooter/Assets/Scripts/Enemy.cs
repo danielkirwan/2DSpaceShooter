@@ -46,6 +46,10 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        if(_player == null)
+        {
+            Debug.Log("PLayer is null");
+        }
         _explosion_anim = GetComponentInChildren<Animator>();
         if (_explosion_anim == null)
         {
@@ -134,7 +138,6 @@ public class Enemy : MonoBehaviour
         if (enemyType.Equals(_enemyType.dodge))
         {
             MoveDodgeEnemy();
-            Debug.Log("Moving dodge enemy");
         }
 
         //if (_hasShield)
